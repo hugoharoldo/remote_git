@@ -38,19 +38,11 @@ public abstract class HDialog extends javax.swing.JDialog {
 
             listagemDadosTabela = new JTable();
 
-            //Quando clida em um item
-//            listagemDadosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
-//                public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                    carregaRegistroTabela();
-//                    System.out.println("mouseClicked");
-//                }
-//            });
-
             //Quando muda o registro na tabela
             listagemDadosTabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
-                    System.out.println("valueChanged");
+
                     carregaRegistroTabela();
                 }
             });
@@ -174,10 +166,9 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnCancelar.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    
+
                     btnCancelarActionPerformed(evt);
-                    
-                    
+
                 }
             });
         }
@@ -374,9 +365,9 @@ public abstract class HDialog extends javax.swing.JDialog {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         if (getUltimoRegistroSelecionado() > 0) {
-            
+
             carregaRegistroTabela(getUltimoRegistroSelecionado());
-        }else{
+        } else {
             modoInicial();
         }
 
@@ -397,9 +388,9 @@ public abstract class HDialog extends javax.swing.JDialog {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         getControler().remove(getControler().getEntity());
-        
+
         getControler().updateDataTable(listagemDadosTabela);
-        
+
         modoInicial();
     }
 
@@ -437,9 +428,6 @@ public abstract class HDialog extends javax.swing.JDialog {
 
     // </editor-fold>
 //    
-//    
-    
-
     private void carregaRegistroTabela() {
 
         int id = Integer.parseInt(getListagemDadosTabela().getValueAt(getListagemDadosTabela().getSelectedRow(), 0).toString());
@@ -447,11 +435,11 @@ public abstract class HDialog extends javax.swing.JDialog {
         if (getUltimoRegistroSelecionado() != id) {
 
             setUltimoRegistroSelecionado(id);
-            
+
             carregaRegistroTabela(id);
         }
     }
-    
+
     private void carregaRegistroTabela(int id) {
 
         if (id > 0) {
