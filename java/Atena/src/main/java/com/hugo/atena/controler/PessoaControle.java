@@ -10,8 +10,6 @@ import com.hugo.atena.model.People;
 import com.hugo.atena.view.TableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -19,12 +17,17 @@ import javax.swing.ListSelectionModel;
  *
  * @author hugo
  */
-public class PessoaControle implements Controler {
+public class PessoaControle extends ControlerBasic implements Controler {
 
     People people;
 
     public PessoaControle() {
 
+    }
+
+    @Override
+    public void init() {
+        people = new People();
     }
 
     @Override
@@ -88,78 +91,14 @@ public class PessoaControle implements Controler {
     }
 
     @Override
-    public void save(Object object) {
-
-        try {
-
-            EntityManager em = EntityManagerUtil.getEntityManager();
-
-            em.getTransaction().begin();
-
-            String mensagem;
-
-            if (((People) object).getId() == 0) {
-                em.persist(object);
-                mensagem = "Registro inserido com sucesso!";
-            } else {
-                em.merge(object);
-                mensagem = "Registro alterado com sucesso!";
-            }
-
-            em.getTransaction().commit();
-
-            JOptionPane.showMessageDialog(null, mensagem);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
-        }
-    }
-
-    @Override
     public void load(int id) {
 
-        if (id > 0) {
+        Object load = this.load(id, getEntity());
 
-            try {
-
-                EntityManager em = EntityManagerUtil.getEntityManager();
-
-                setEntity(em.find(People.class, id));
-
-            } catch (Exception e) {
-
-                setEntity(new People());
-
-                JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
-            }
-
+        if (load != null) {
+            setEntity((People) load);
         } else {
             setEntity(new People());
-        }
-
-    }
-
-    @Override
-    public void init() {
-        people = new People();
-    }
-
-    @Override
-    public void remove(Object object) {
-        try {
-
-            EntityManager em = EntityManagerUtil.getEntityManager();
-
-            em.getTransaction().begin();
-            
-            em.remove(object);
-   
-            em.getTransaction().commit();
-
-            JOptionPane.showMessageDialog(null, "Registro removido");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
         }
     }
 }
