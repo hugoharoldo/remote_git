@@ -8,7 +8,6 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.PessoaControle;
 import com.hugo.atena.model.People;
-import javax.swing.JTable;
 
 /**
  *
@@ -31,9 +30,8 @@ public class FormPessoa extends HDialog {
         initComponents();
 
         jPanel1.add(this.getPainelSalvador());
-        controlePessoa.atualizaValoresTabela(listagemDadosTabela);
-        
-       
+
+        painelListaDados.add(this.getPainelNavegacao(), java.awt.BorderLayout.PAGE_END);
 
     }
 
@@ -47,17 +45,8 @@ public class FormPessoa extends HDialog {
     private void initComponents() {
 
         jTabbedPane = new javax.swing.JTabbedPane();
-        jPanelList = new javax.swing.JPanel();
-        painelNavegacao = new javax.swing.JPanel();
-        listagemDados = new javax.swing.JScrollPane();
-        listagemDadosTabela = new javax.swing.JTable();
-        navegador = new javax.swing.JPanel();
-        jButtonPrimeiro = new javax.swing.JButton();
-        jButtonAnterior = new javax.swing.JButton();
-        jButtonProximo = new javax.swing.JButton();
-        jButtonUltimo = new javax.swing.JButton();
-        jButtonFechar = new javax.swing.JButton();
-        jPanelData = new javax.swing.JPanel();
+        painelListaDados = new javax.swing.JPanel();
+        painelCadastro = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jTextFieldEmail = new javax.swing.JTextField();
@@ -81,72 +70,13 @@ public class FormPessoa extends HDialog {
             }
         });
 
-        jPanelList.setLayout(new java.awt.BorderLayout());
+        painelListaDados.setLayout(new java.awt.BorderLayout());
+        jTabbedPane.addTab("Listagem", painelListaDados);
 
-        painelNavegacao.setLayout(new java.awt.BorderLayout());
-
-        listagemDadosTabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        listagemDadosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listagemDadosTabelaMouseClicked(evt);
-            }
-        });
-        listagemDados.setViewportView(listagemDadosTabela);
-
-        painelNavegacao.add(listagemDados, java.awt.BorderLayout.NORTH);
-
-        navegador.setLayout(new java.awt.GridLayout(1, 0));
-
-        jButtonPrimeiro.setText("Primeiro");
-        navegador.add(jButtonPrimeiro);
-
-        jButtonAnterior.setText("Anterior");
-        navegador.add(jButtonAnterior);
-
-        jButtonProximo.setText("Próximo");
-        jButtonProximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonProximoActionPerformed(evt);
-            }
-        });
-        navegador.add(jButtonProximo);
-
-        jButtonUltimo.setText("Último");
-        jButtonUltimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonUltimoActionPerformed(evt);
-            }
-        });
-        navegador.add(jButtonUltimo);
-
-        jButtonFechar.setText("Fechar");
-        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharActionPerformed(evt);
-            }
-        });
-        navegador.add(jButtonFechar);
-
-        painelNavegacao.add(navegador, java.awt.BorderLayout.CENTER);
-
-        jPanelList.add(painelNavegacao, java.awt.BorderLayout.PAGE_END);
-
-        jTabbedPane.addTab("Listagem", jPanelList);
-
-        jPanelData.setLayout(new java.awt.BorderLayout());
+        painelCadastro.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
-        jPanelData.add(jPanel1, java.awt.BorderLayout.SOUTH);
+        painelCadastro.add(jPanel1, java.awt.BorderLayout.SOUTH);
 
         jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -242,9 +172,9 @@ public class FormPessoa extends HDialog {
                 .addContainerGap())
         );
 
-        jPanelData.add(jPanel2, java.awt.BorderLayout.NORTH);
+        painelCadastro.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-        jTabbedPane.addTab("Dados", jPanelData);
+        jTabbedPane.addTab("Dados", painelCadastro);
 
         getContentPane().add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
@@ -252,22 +182,8 @@ public class FormPessoa extends HDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonProximoActionPerformed
-
-    private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonUltimoActionPerformed
-
-    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButtonFecharActionPerformed
-
     private void jTextFieldCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCpfActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jTextFieldCpfActionPerformed
 
 
@@ -278,21 +194,6 @@ public class FormPessoa extends HDialog {
     private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel2FocusGained
-
-    private void listagemDadosTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listagemDadosTabelaMouseClicked
-        // TODO add your handling code here:
-        int id = Integer.parseInt(listagemDadosTabela.getValueAt(listagemDadosTabela.getSelectedRow(), 0).toString());
-
-        controlePessoa.load(id);
-        
-        //Alimenta dados tela
-        jTextFieldCpf.setText(((People) controlePessoa.getEntity()).getCPFCNPJ());
-        jTextFieldNome.setText(((People) controlePessoa.getEntity()).getName());
-        jTextFieldEmail.setText(((People) controlePessoa.getEntity()).getEmail());
-        jTextFieldFone.setText(((People) controlePessoa.getEntity()).getFone());
-        jTextAreaComplemento.setText(((People) controlePessoa.getEntity()).getComplemento());
-        
-    }//GEN-LAST:event_listagemDadosTabelaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -340,11 +241,6 @@ public class FormPessoa extends HDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAnterior;
-    private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonPrimeiro;
-    private javax.swing.JButton jButtonProximo;
-    private javax.swing.JButton jButtonUltimo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -352,8 +248,6 @@ public class FormPessoa extends HDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanelData;
-    private javax.swing.JPanel jPanelList;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTextArea jTextAreaComplemento;
@@ -361,10 +255,8 @@ public class FormPessoa extends HDialog {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldFone;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JScrollPane listagemDados;
-    private javax.swing.JTable listagemDadosTabela;
-    private javax.swing.JPanel navegador;
-    private javax.swing.JPanel painelNavegacao;
+    private javax.swing.JPanel painelCadastro;
+    private javax.swing.JPanel painelListaDados;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -403,9 +295,9 @@ public class FormPessoa extends HDialog {
 
     @Override
     public Object getValoresInformadosNaTela() {
-        
+
         People people = (People) controlePessoa.getEntity();
-        
+
         people.setCPFCNPJ(jTextFieldCpf.getText());
         people.setComplemento(jTextAreaComplemento.getText());
         people.setEmail(jTextFieldEmail.getText());
@@ -422,8 +314,13 @@ public class FormPessoa extends HDialog {
     }
 
     @Override
-    public JTable getTabelaDados() {
-        return listagemDadosTabela;
+    public void atualizaValoresDadosTela() {
+        
+        jTextFieldCpf.setText(((People) controlePessoa.getEntity()).getCPFCNPJ());
+        jTextFieldNome.setText(((People) controlePessoa.getEntity()).getName());
+        jTextFieldEmail.setText(((People) controlePessoa.getEntity()).getEmail());
+        jTextFieldFone.setText(((People) controlePessoa.getEntity()).getFone());
+        jTextAreaComplemento.setText(((People) controlePessoa.getEntity()).getComplemento());
+        
     }
-
 }

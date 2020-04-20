@@ -6,6 +6,7 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.controler.Controler;
+import java.awt.BorderLayout;
 import java.awt.Frame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,11 +19,51 @@ import javax.swing.JTable;
  */
 public abstract class HDialog extends javax.swing.JDialog {
 
-
-    private JPanel painelDados, painelSalvador;
+    private JPanel painelNavegacao, navegador, painelSalvador;
     private JButton btnSalvar, btnNovo, btnEditar, btnCancelar, btnExcluir;
-    private JScrollPane jScrollPanePainelDados;
-    private JTable jTable;
+    private JButton btnPrimeiro, btnAnterior, btnProximo, btnUltimo;
+    private JScrollPane listagemDados;
+    private JTable listagemDadosTabela;
+
+    /**
+     * @return the painelNavegacao
+     */
+    public JPanel getPainelNavegacao() {
+
+        if (painelNavegacao == null) {
+
+            listagemDadosTabela = new JTable();
+
+            listagemDadosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    listagemDadosTabelaMouseClicked(evt);
+                }
+            });
+
+            listagemDados = new JScrollPane();
+            listagemDados.setViewportView(getListagemDadosTabela());
+
+            painelNavegacao = new JPanel();
+            painelNavegacao.setLayout(new BorderLayout());
+            painelNavegacao.add(listagemDados, java.awt.BorderLayout.NORTH);
+
+            navegador = new JPanel();
+
+            navegador.setLayout(new java.awt.GridLayout(1, 0));
+
+            navegador.add(getBtnPrimeiro());
+            navegador.add(getBtnAnterior());
+            navegador.add(getBtnProximo());
+            navegador.add(getBtnUltimo());
+
+            painelNavegacao.add(navegador, java.awt.BorderLayout.CENTER);
+
+            getControler().atualizaValoresTabela(listagemDadosTabela);
+
+        }
+
+        return painelNavegacao;
+    }
 
     public HDialog(Frame owner, boolean modal) {
         super(owner, modal);
@@ -37,9 +78,11 @@ public abstract class HDialog extends javax.swing.JDialog {
     public abstract void preencherTextField(Object object);
 
     public abstract Controler getControler();
-    
-    public abstract JTable getTabelaDados(); 
 
+    /**
+     * Atualizar os Fields da tela com os valores que estão no Controler
+     */
+    public abstract void atualizaValoresDadosTela();
 
     /**
      * @return the painelSalvador
@@ -169,6 +212,94 @@ public abstract class HDialog extends javax.swing.JDialog {
 
     }
 
+    /**
+     * @return the btnPrimeiro
+     */
+    public JButton getBtnPrimeiro() {
+
+        if (btnPrimeiro == null) {
+
+            btnPrimeiro = new JButton();
+            btnPrimeiro.setText("Primeiro");
+            btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.println("Primeiro");
+                }
+
+            });
+
+        }
+
+        return btnPrimeiro;
+    }
+
+    /**
+     * @return the btnAnterior
+     */
+    public JButton getBtnAnterior() {
+
+        if (btnAnterior == null) {
+
+            btnAnterior = new JButton();
+            btnAnterior.setText("Anterior");
+            btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.println("Anterior");
+                }
+
+            });
+
+        }
+
+        return btnAnterior;
+    }
+
+    /**
+     * @return the btnProximo
+     */
+    public JButton getBtnProximo() {
+
+        if (btnProximo == null) {
+
+            btnProximo = new JButton();
+            btnProximo.setText("Proximo");
+            btnProximo.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.println("btnProximo");
+                }
+
+            });
+
+        }
+
+        return btnProximo;
+    }
+
+    /**
+     * @return the btnProximo
+     */
+    public JButton getBtnUltimo() {
+
+        if (btnUltimo == null) {
+
+            btnUltimo = new JButton();
+            btnUltimo.setText("Último");
+            btnUltimo.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    System.out.println("btnUltimo");
+                }
+
+            });
+
+        }
+
+        return btnUltimo;
+    }
+
     // </editor-fold>
     //
     // <editor-fold defaultstate="collapsed" desc="Eventos dos botões">    
@@ -196,8 +327,10 @@ public abstract class HDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         getControler().gravar(getValoresInformadosNaTela());
         modoInicialComRegistro();
-        
-        getControler().atualizaValoresTabela(getTabelaDados());
+
+        if (getListagemDadosTabela() != null) {
+            getControler().atualizaValoresTabela(getListagemDadosTabela());
+        }
 
     }
 
@@ -239,45 +372,24 @@ public abstract class HDialog extends javax.swing.JDialog {
     }
 
     // </editor-fold>
-    /**
-     * @return the painelDados
-     */
-    public JPanel getPainelDados() {
+//    
+//    
+    private void listagemDadosTabelaMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
 
-        if (painelDados == null) {
+        int id = Integer.parseInt(getListagemDadosTabela().getValueAt(getListagemDadosTabela().getSelectedRow(), 0).toString());
 
-            painelDados = new JPanel();
-            painelDados.setLayout(new java.awt.GridLayout(1, 0));
-            
-            jTable = new JTable();
-            jScrollPanePainelDados = new JScrollPane();
-                    
-            jScrollPanePainelDados.setViewportView(jTable);
-            painelDados.add(getjScrollPanePainelDados(), java.awt.BorderLayout.NORTH);
+        getControler().load(id);
 
-        }
+        atualizaValoresDadosTela();
 
-        return painelDados;
-    }
-    
-    
-    /**
-     * @return the jScrollPanePainelDados
-     */
-    private JScrollPane getjScrollPanePainelDados() {
-        
-
-        
-        return jScrollPanePainelDados;
     }
 
     /**
-     * @return the jTable
+     * @return the listagemDadosTabela
      */
-    public JTable getjTable() {
-        
-
-        
-        return jTable;
+    public JTable getListagemDadosTabela() {
+        return listagemDadosTabela;
     }
+
 }
