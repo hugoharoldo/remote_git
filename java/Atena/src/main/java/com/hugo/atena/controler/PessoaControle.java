@@ -135,4 +135,8 @@ public class PessoaControle implements Controler {
 
     }
 
+    @Override
+    public void novo() {
+       people = new People();
+    }
 }

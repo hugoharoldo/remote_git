@@ -225,6 +225,11 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    
+                                           //Faz ficar visível a última linha
+                        Rectangle cellBounds = getListagemDadosTabela().getCellRect(0, 0, true);
+
+                        getListagemDadosTabela().scrollRectToVisible(cellBounds);
 
                     getListagemDadosTabela().setRowSelectionInterval(0, 0);
 
@@ -281,13 +286,13 @@ public abstract class HDialog extends javax.swing.JDialog {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                    if ((getListagemDadosTabela().getRowCount() -1)
-                           > getListagemDadosTabela().getSelectedRow()) {
+                    if ((getListagemDadosTabela().getRowCount() - 1)
+                            > getListagemDadosTabela().getSelectedRow()) {
 
                         getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getSelectedRow() + 1);
 
                     }
-                    
+
                 }
 
             });
@@ -312,7 +317,14 @@ public abstract class HDialog extends javax.swing.JDialog {
 
                     if (getListagemDadosTabela().getRowCount() > 0) {
 
+                        //Faz ficar visível a última linha
+                        Rectangle cellBounds = getListagemDadosTabela().getCellRect(getListagemDadosTabela().getRowCount() - 1, 0, true);
+
+                        getListagemDadosTabela().scrollRectToVisible(cellBounds);
+                        
+                        //Seleciona o ultimo registro
                         getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getRowCount() - 1);
+
                     }
 
                 }
@@ -332,6 +344,7 @@ public abstract class HDialog extends javax.swing.JDialog {
         configurarBotoes(false, false, true, true, false);
         habilitarTextField(true);
         limparTextField();
+        getControler().novo();
 
     }
 

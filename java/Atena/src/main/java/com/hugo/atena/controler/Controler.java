@@ -19,6 +19,8 @@ public interface Controler {
     
     public void load(int id);
     
+    public void novo();
+    
     public void gravar(Object object);
     
     public void atualizaValoresTabela(JTable table);
