@@ -13,6 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 /**
  *
@@ -35,9 +39,20 @@ public abstract class HDialog extends javax.swing.JDialog {
 
             listagemDadosTabela = new JTable();
 
-            listagemDadosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    listagemDadosTabelaMouseClicked(evt);
+            //Quando clida em um item
+//            listagemDadosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+//                public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                    carregaRegistroTabela();
+//                    System.out.println("mouseClicked");
+//                }
+//            });
+
+            //Quando muda o registro na tabela
+            listagemDadosTabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    System.out.println("valueChanged");
+                    carregaRegistroTabela();
                 }
             });
 
@@ -225,11 +240,11 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    
-                                           //Faz ficar visível a última linha
-                        Rectangle cellBounds = getListagemDadosTabela().getCellRect(0, 0, true);
 
-                        getListagemDadosTabela().scrollRectToVisible(cellBounds);
+                    //Faz ficar visível a última linha
+                    Rectangle cellBounds = getListagemDadosTabela().getCellRect(0, 0, true);
+
+                    getListagemDadosTabela().scrollRectToVisible(cellBounds);
 
                     getListagemDadosTabela().setRowSelectionInterval(0, 0);
 
@@ -321,7 +336,7 @@ public abstract class HDialog extends javax.swing.JDialog {
                         Rectangle cellBounds = getListagemDadosTabela().getCellRect(getListagemDadosTabela().getRowCount() - 1, 0, true);
 
                         getListagemDadosTabela().scrollRectToVisible(cellBounds);
-                        
+
                         //Seleciona o ultimo registro
                         getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getRowCount() - 1);
 
@@ -411,14 +426,18 @@ public abstract class HDialog extends javax.swing.JDialog {
     // </editor-fold>
 //    
 //    
-    private void listagemDadosTabelaMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
+    private int ultimoRegistroSelecionado = -1;
+
+    private void carregaRegistroTabela() {
 
         int id = Integer.parseInt(getListagemDadosTabela().getValueAt(getListagemDadosTabela().getSelectedRow(), 0).toString());
 
-        getControler().load(id);
+        if (ultimoRegistroSelecionado != id) {
 
-        atualizaValoresDadosTela();
+            getControler().load(id);
+
+            atualizaValoresDadosTela();
+        }
 
     }
 
