@@ -8,6 +8,7 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.Controler;
 import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.Rectangle;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -224,7 +225,9 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnPrimeiro.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.println("Primeiro");
+
+                    getListagemDadosTabela().setRowSelectionInterval(0, 0);
+
                 }
 
             });
@@ -246,7 +249,16 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnAnterior.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.println("Anterior");
+
+                    if (getListagemDadosTabela().getSelectedRow() > 0) {
+
+                        getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getSelectedRow() - 1);
+
+                    } else {
+                        //primeiro registro
+                        getListagemDadosTabela().setRowSelectionInterval(0, 0);
+                    }
+
                 }
 
             });
@@ -268,7 +280,14 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnProximo.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.println("btnProximo");
+
+                    if ((getListagemDadosTabela().getRowCount() -1)
+                           > getListagemDadosTabela().getSelectedRow()) {
+
+                        getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getSelectedRow() + 1);
+
+                    }
+                    
                 }
 
             });
@@ -290,7 +309,12 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnUltimo.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    System.out.println("btnUltimo");
+
+                    if (getListagemDadosTabela().getRowCount() > 0) {
+
+                        getListagemDadosTabela().setRowSelectionInterval(0, getListagemDadosTabela().getRowCount() - 1);
+                    }
+
                 }
 
             });
