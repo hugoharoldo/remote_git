@@ -15,8 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 
 /**
  *
@@ -29,6 +27,7 @@ public abstract class HDialog extends javax.swing.JDialog {
     private JButton btnPrimeiro, btnAnterior, btnProximo, btnUltimo;
     private JScrollPane listagemDados;
     private JTable listagemDadosTabela;
+    private int ultimoRegistroSelecionado = -1;
 
     /**
      * @return the painelNavegacao
@@ -74,7 +73,7 @@ public abstract class HDialog extends javax.swing.JDialog {
 
             painelNavegacao.add(navegador, java.awt.BorderLayout.CENTER);
 
-            getControler().atualizaValoresTabela(listagemDadosTabela);
+            getControler().updateDataTable(listagemDadosTabela);
 
         }
 
@@ -175,7 +174,10 @@ public abstract class HDialog extends javax.swing.JDialog {
             btnCancelar.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    
                     btnCancelarActionPerformed(evt);
+                    
+                    
                 }
             });
         }
@@ -359,7 +361,7 @@ public abstract class HDialog extends javax.swing.JDialog {
         configurarBotoes(false, false, true, true, false);
         habilitarTextField(true);
         limparTextField();
-        getControler().novo();
+        getControler().init();
 
     }
 
@@ -371,23 +373,33 @@ public abstract class HDialog extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        modoInicial();
+        if (getUltimoRegistroSelecionado() > 0) {
+            
+            carregaRegistroTabela(getUltimoRegistroSelecionado());
+        }else{
+            modoInicial();
+        }
+
     }
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
 
         // TODO add your handling code here:
-        getControler().gravar(getValoresInformadosNaTela());
+        getControler().save(getValoresInformadosNaTela());
         modoInicialComRegistro();
 
         if (getListagemDadosTabela() != null) {
-            getControler().atualizaValoresTabela(getListagemDadosTabela());
+            getControler().updateDataTable(getListagemDadosTabela());
         }
 
     }
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        getControler().remove(getControler().getEntity());
+        
+        getControler().updateDataTable(listagemDadosTabela);
+        
         modoInicial();
     }
 
@@ -426,17 +438,31 @@ public abstract class HDialog extends javax.swing.JDialog {
     // </editor-fold>
 //    
 //    
-    private int ultimoRegistroSelecionado = -1;
+    
 
     private void carregaRegistroTabela() {
 
         int id = Integer.parseInt(getListagemDadosTabela().getValueAt(getListagemDadosTabela().getSelectedRow(), 0).toString());
 
-        if (ultimoRegistroSelecionado != id) {
+        if (getUltimoRegistroSelecionado() != id) {
+
+            setUltimoRegistroSelecionado(id);
+            
+            carregaRegistroTabela(id);
+        }
+    }
+    
+    private void carregaRegistroTabela(int id) {
+
+        if (id > 0) {
 
             getControler().load(id);
 
             atualizaValoresDadosTela();
+
+            modoInicialComRegistro();
+        } else {
+            modoInicial();
         }
 
     }
@@ -446,6 +472,20 @@ public abstract class HDialog extends javax.swing.JDialog {
      */
     public JTable getListagemDadosTabela() {
         return listagemDadosTabela;
+    }
+
+    /**
+     * @return the ultimoRegistroSelecionado
+     */
+    public int getUltimoRegistroSelecionado() {
+        return ultimoRegistroSelecionado;
+    }
+
+    /**
+     * @param ultimoRegistroSelecionado the ultimoRegistroSelecionado to set
+     */
+    public void setUltimoRegistroSelecionado(int ultimoRegistroSelecionado) {
+        this.ultimoRegistroSelecionado = ultimoRegistroSelecionado;
     }
 
 }

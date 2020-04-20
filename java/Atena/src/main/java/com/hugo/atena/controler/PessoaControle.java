@@ -46,7 +46,7 @@ public class PessoaControle implements Controler {
     }
 
     @Override
-    public void atualizaValoresTabela(JTable jTable) {
+    public void updateDataTable(JTable jTable) {
 
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"ID", "Nome", "CPF", "Telefone", "E-mail"};
@@ -88,7 +88,7 @@ public class PessoaControle implements Controler {
     }
 
     @Override
-    public void gravar(Object object) {
+    public void save(Object object) {
 
         try {
 
@@ -96,15 +96,19 @@ public class PessoaControle implements Controler {
 
             em.getTransaction().begin();
 
+            String mensagem;
+
             if (((People) object).getId() == 0) {
                 em.persist(object);
+                mensagem = "Registro inserido com sucesso!";
             } else {
                 em.merge(object);
+                mensagem = "Registro alterado com sucesso!";
             }
 
             em.getTransaction().commit();
 
-            JOptionPane.showMessageDialog(null, "Pessoa inserida com sucesso!");
+            JOptionPane.showMessageDialog(null, mensagem);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
@@ -136,8 +140,26 @@ public class PessoaControle implements Controler {
     }
 
     @Override
-    public void novo() {
-       people = new People();
+    public void init() {
+        people = new People();
     }
 
+    @Override
+    public void remove(Object object) {
+        try {
+
+            EntityManager em = EntityManagerUtil.getEntityManager();
+
+            em.getTransaction().begin();
+            
+            em.remove(object);
+   
+            em.getTransaction().commit();
+
+            JOptionPane.showMessageDialog(null, "Registro removido");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+        }
+    }
 }

@@ -19,10 +19,12 @@ public interface Controler {
     
     public void load(int id);
     
-    public void novo();
+    public void remove(Object object);
     
-    public void gravar(Object object);
+    public void init();
     
-    public void atualizaValoresTabela(JTable table);
+    public void save(Object object);
+    
+    public void updateDataTable(JTable table);
 
 }
