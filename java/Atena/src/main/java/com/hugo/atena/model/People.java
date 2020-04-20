@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author hugo
  */
 @Entity
-@Table(name = "pessoinha")
+@Table(name = "people")
 public class People implements Serializable {
 
     @Id
@@ -127,7 +127,6 @@ public class People implements Serializable {
         return true;
     }
 
-    
     /**
      * @return the fone
      */
@@ -155,6 +154,5 @@ public class People implements Serializable {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-    
 
 }

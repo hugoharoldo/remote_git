@@ -5,7 +5,6 @@
  */
 package com.hugo.atena.view;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +32,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         jMenuRegister = new javax.swing.JMenu();
         jMenuIPeople = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
 
@@ -48,6 +48,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRegister.add(jMenuIPeople);
+
+        jMenuItem1.setText("Usuários do Sistemas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem1);
 
         menuBar.add(jMenuRegister);
 
@@ -104,6 +112,17 @@ public class FormPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Atenas");
     }//GEN-LAST:event_jMenuAboutActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+
+        FormUsuarioSistema frmPeople = new FormUsuarioSistema(this, true);
+        frmPeople.setTitle("Manutenção de Usuários do Sistema");
+        frmPeople.setLocationRelativeTo(null);
+        frmPeople.setResizable(false);
+        frmPeople.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -144,6 +163,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuIPeople;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

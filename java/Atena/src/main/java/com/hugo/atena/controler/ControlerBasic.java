@@ -6,8 +6,6 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.daos.EntityManagerUtil;
-import com.hugo.atena.model.People;
-import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -15,13 +13,13 @@ import javax.swing.JOptionPane;
  *
  * @author hugo
  */
-public class ControlerBasic {
+public abstract class ControlerBasic {
 
     public ControlerBasic() {
 
     }
-
-    public void save(Object object) {
+    
+    public void save(Object object, int idObjeto) {
 
         try {
 
@@ -31,7 +29,7 @@ public class ControlerBasic {
 
             String mensagem;
 
-            if (((People) object).getId() == 0) {
+            if (idObjeto == 0) {
                 em.persist(object);
                 mensagem = "Registro inserido com sucesso!";
             } else {

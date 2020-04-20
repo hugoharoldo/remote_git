@@ -101,4 +101,9 @@ public class PessoaControle extends ControlerBasic implements Controler {
             setEntity(new People());
         }
     }
+
+    @Override
+    public void save(Object object) {
+        super.save(object, ((People) object).getId());
+    }
 }

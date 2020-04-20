@@ -40,8 +40,8 @@
         <Container class="javax.swing.JPanel" name="painelListaDados">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Listagem">
-                <Property name="tabTitle" type="java.lang.String" value="Listagem"/>
+              <JTabbedPaneConstraints tabName="Lista de pessoas">
+                <Property name="tabTitle" type="java.lang.String" value="Lista de pessoas"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -51,29 +51,17 @@
         <Container class="javax.swing.JPanel" name="painelCadastro">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Dados">
-                <Property name="tabTitle" type="java.lang.String" value="Dados"/>
+              <JTabbedPaneConstraints tabName="Pessoa">
+                <Property name="tabTitle" type="java.lang.String" value="Pessoa"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel1">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="South"/>
-                </Constraint>
-              </Constraints>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                <Property name="columns" type="int" value="0"/>
-                <Property name="rows" type="int" value="1"/>
-              </Layout>
-            </Container>
-            <Container class="javax.swing.JPanel" name="jPanel2">
+            <Container class="javax.swing.JPanel" name="painelCamposPersonaizados">
               <Events>
-                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPanel2FocusGained"/>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="painelCamposPersonaizadosFocusGained"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -216,6 +204,18 @@
                   </SubComponents>
                 </Container>
               </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="painelBotoesManutencao">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="South"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="0"/>
+                <Property name="rows" type="int" value="1"/>
+              </Layout>
             </Container>
           </SubComponents>
         </Container>

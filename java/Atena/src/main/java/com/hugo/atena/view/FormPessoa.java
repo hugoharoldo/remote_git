@@ -24,12 +24,10 @@ public class FormPessoa extends HDialog {
      * @param modal
      */
     public FormPessoa(java.awt.Frame parent, boolean modal) {
-
         super(parent, modal);
-
         initComponents();
 
-        jPanel1.add(this.getPainelSalvador());
+        painelBotoesManutencao.add(this.getPainelSalvador());
 
         painelListaDados.add(this.getPainelNavegacao(), java.awt.BorderLayout.PAGE_END);
 
@@ -47,8 +45,7 @@ public class FormPessoa extends HDialog {
         jTabbedPane = new javax.swing.JTabbedPane();
         painelListaDados = new javax.swing.JPanel();
         painelCadastro = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        painelCamposPersonaizados = new javax.swing.JPanel();
         jTextFieldEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -60,6 +57,7 @@ public class FormPessoa extends HDialog {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaComplemento = new javax.swing.JTextArea();
+        painelBotoesManutencao = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Pessoas");
@@ -71,16 +69,13 @@ public class FormPessoa extends HDialog {
         });
 
         painelListaDados.setLayout(new java.awt.BorderLayout());
-        jTabbedPane.addTab("Listagem", painelListaDados);
+        jTabbedPane.addTab("Lista de pessoas", painelListaDados);
 
         painelCadastro.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
-        painelCadastro.add(jPanel1, java.awt.BorderLayout.SOUTH);
-
-        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+        painelCamposPersonaizados.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel2FocusGained(evt);
+                painelCamposPersonaizadosFocusGained(evt);
             }
         });
 
@@ -109,72 +104,75 @@ public class FormPessoa extends HDialog {
         jTextAreaComplemento.setRows(5);
         jScrollPane2.setViewportView(jTextAreaComplemento);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelCamposPersonaizadosLayout = new javax.swing.GroupLayout(painelCamposPersonaizados);
+        painelCamposPersonaizados.setLayout(painelCamposPersonaizadosLayout);
+        painelCamposPersonaizadosLayout.setHorizontalGroup(
+            painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposPersonaizadosLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldFone, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
+        painelCamposPersonaizadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
 
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        painelCamposPersonaizadosLayout.setVerticalGroup(
+            painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCpf)
                     .addComponent(jLabel2))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldEmail)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldFone)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        painelCadastro.add(jPanel2, java.awt.BorderLayout.NORTH);
+        painelCadastro.add(painelCamposPersonaizados, java.awt.BorderLayout.NORTH);
 
-        jTabbedPane.addTab("Dados", painelCadastro);
+        painelBotoesManutencao.setLayout(new java.awt.GridLayout(1, 0));
+        painelCadastro.add(painelBotoesManutencao, java.awt.BorderLayout.SOUTH);
+
+        jTabbedPane.addTab("Pessoa", painelCadastro);
 
         getContentPane().add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
@@ -191,9 +189,9 @@ public class FormPessoa extends HDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPaneFocusGained
 
-    private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
+    private void painelCamposPersonaizadosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_painelCamposPersonaizadosFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel2FocusGained
+    }//GEN-LAST:event_painelCamposPersonaizadosFocusGained
 
     /**
      * @param args the command line arguments
@@ -246,8 +244,6 @@ public class FormPessoa extends HDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTextArea jTextAreaComplemento;
@@ -255,7 +251,9 @@ public class FormPessoa extends HDialog {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldFone;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JPanel painelBotoesManutencao;
     private javax.swing.JPanel painelCadastro;
+    private javax.swing.JPanel painelCamposPersonaizados;
     private javax.swing.JPanel painelListaDados;
     // End of variables declaration//GEN-END:variables
 
