@@ -32,6 +32,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         jMenuRegister = new javax.swing.JMenu();
         jMenuIPeople = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
@@ -48,6 +49,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRegister.add(jMenuIPeople);
+
+        jMenuItem2.setText("Competencia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem2);
 
         jMenuItem1.setText("Usuários do Sistemas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +132,17 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        FormCompetencia frmPeople = new FormCompetencia(this, true);
+        frmPeople.setTitle("Manutenção de Competencias");
+        frmPeople.setLocationRelativeTo(null);
+        frmPeople.setResizable(false);
+        frmPeople.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -164,6 +184,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuIPeople;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

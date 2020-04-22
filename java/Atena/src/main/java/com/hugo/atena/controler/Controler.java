@@ -13,18 +13,31 @@ import javax.swing.JTable;
  */
 public interface Controler {
 
-    public Object getEntity();
-    
-    public void setEntity(Object object);
-    
-    public void load(int id);
-    
-    public void remove(Object object);
-    
+    /**
+     * Model = new Model();
+     */
     public void init();
-    
+
+    /**
+     * if (model == null) { <br>
+     * model = new Model(); <br>
+     * } <br>
+     * <br>
+     * return model;
+     * <br>
+     *
+     * @return Model
+     */
+    public Object getEntity();
+
+    public void setEntity(Object object);
+
+    public void load(int id);
+
+    public void remove(Object object);
+
     public void save(Object object);
-    
+
     public void updateDataTable(JTable table);
 
 }
