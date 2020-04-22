@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hugo.atena.daos;
+package com.hugo.atena.model.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

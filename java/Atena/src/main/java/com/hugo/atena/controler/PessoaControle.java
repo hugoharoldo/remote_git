@@ -5,7 +5,7 @@
  */
 package com.hugo.atena.controler;
 
-import com.hugo.atena.daos.EntityManagerUtil;
+import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.model.People;
 import com.hugo.atena.view.TableModel;
 import java.util.ArrayList;

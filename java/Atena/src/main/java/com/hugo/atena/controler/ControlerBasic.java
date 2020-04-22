@@ -5,7 +5,7 @@
  */
 package com.hugo.atena.controler;
 
-import com.hugo.atena.daos.EntityManagerUtil;
+import com.hugo.atena.model.util.EntityManagerUtil;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
