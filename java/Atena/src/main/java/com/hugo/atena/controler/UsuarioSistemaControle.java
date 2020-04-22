@@ -10,6 +10,7 @@ import com.hugo.atena.model.UsuarioSistema;
 import com.hugo.atena.view.TableModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Query;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -22,7 +23,7 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
     UsuarioSistema usuarioSistema;
 
     public UsuarioSistemaControle() {
-        
+
     }
 
     @Override
@@ -48,7 +49,6 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
         jTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         jTable.getColumnModel().getColumn(0).setResizable(false);
 
-        
         jTable.getColumnModel().getColumn(1).setResizable(true);
 
         jTable.getTableHeader().setResizingAllowed(false);
@@ -93,5 +93,31 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
     @Override
     public void save(Object object) {
         super.save(object, ((UsuarioSistema) object).getId());
+    }
+
+    public static boolean isUsuarioAutorizado(String usuario, String senha) {
+
+        if (usuario == null || senha == null) {
+            return false;
+        }
+
+        try {
+
+            String jpSql = "FROM UsuarioSistema WHERE nome = ?1";
+
+            Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
+            query.setParameter(1, usuario);
+
+            UsuarioSistema us = (UsuarioSistema) query.getSingleResult();
+
+            return senha.equals(us.getSenha());
+            
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            
+            return false;
+        }
+
     }
 }

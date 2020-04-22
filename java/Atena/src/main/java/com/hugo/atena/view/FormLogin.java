@@ -5,6 +5,9 @@
  */
 package com.hugo.atena.view;
 
+import com.hugo.atena.controler.UsuarioSistemaControle;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hugo
@@ -29,25 +32,25 @@ public class FormLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
+        jTextFieldUsuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setText("Login:");
+        jLabel1.setText("Usuário:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 38, 17);
+        jLabel1.setBounds(20, 20, 80, 17);
 
         jLabel2.setText("Senha:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 70, 43, 17);
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(20, 90, 210, 29);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(20, 40, 210, 29);
+        getContentPane().add(jPasswordFieldSenha);
+        jPasswordFieldSenha.setBounds(20, 90, 210, 29);
+        getContentPane().add(jTextFieldUsuario);
+        jTextFieldUsuario.setBounds(20, 40, 210, 29);
 
         jButton1.setText("Acessar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,10 +76,19 @@ public class FormLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FormPrincipal fp = new FormPrincipal();
-        fp.setVisible(true);
 
-        dispose();
+        if (UsuarioSistemaControle.isUsuarioAutorizado(jTextFieldUsuario.getText(),
+                jPasswordFieldSenha.getText())) {
+
+            FormPrincipal fp = new FormPrincipal();
+            fp.setVisible(true);
+
+            dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Acesso não autorizado");
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -126,7 +138,7 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }
