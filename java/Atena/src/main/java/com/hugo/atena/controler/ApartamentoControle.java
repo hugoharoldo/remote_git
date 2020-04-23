@@ -6,7 +6,7 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
-import com.hugo.atena.model.People;
+import com.hugo.atena.model.Apartamento;
 import com.hugo.atena.view.TableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,62 +17,54 @@ import javax.swing.ListSelectionModel;
  *
  * @author hugo
  */
-public class PessoaControle extends ControlerBasic implements Controler {
+public class ApartamentoControle extends ControlerBasic implements Controler {
 
-    People people;
+    Apartamento apartamento;
 
-    public PessoaControle() {
+    public ApartamentoControle() {
 
     }
 
     @Override
     public void init() {
-        people = new People();
+        apartamento = new Apartamento();
     }
 
     @Override
     public Object getEntity() {
 
-        if (people == null) {
+        if (apartamento == null) {
 
-            people = new People();
+            apartamento = new Apartamento();
         }
 
-        return people;
+        return apartamento;
     }
 
     @Override
     public void setEntity(Object object) {
 
-        people = (People) object;
+        apartamento = (Apartamento) object;
 
     }
 
-    /**
-     * Retornam todas as pessoas cadastradas
-     * @return 
-     */
-    public static List<People> getPessoas() {
-
-        String jpSql = "from People order";
-
-        return EntityManagerUtil.getEntityManager().createQuery(jpSql).getResultList();
-
-    }
-    
     @Override
     public void updateDataTable(JTable jTable) {
 
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "CPF", "Telefone", "E-mail"};
+        String[] colunas = new String[]{"ID", "Apartamento", "Responsável" , "Proprietário"};
 
-        for (People p : getPessoas()) {
+        String jpSql = "from Apartamento order";
+
+        List<Apartamento> list = EntityManagerUtil.getEntityManager()
+                .createQuery(jpSql).getResultList();
+
+        for (Apartamento p : list) {
             dados.add(new Object[]{
                 p.getId(),
-                p.getName(),
-                p.getCPFCNPJ(),
-                p.getFone(),
-                p.getEmail()});
+                p.getNrApartamento(),
+                p.getResponsavel().getName(),
+                p.getProprietario().getName()});
         }
 
         TableModel model = new TableModel(dados, colunas);
@@ -103,14 +95,14 @@ public class PessoaControle extends ControlerBasic implements Controler {
         Object load = this.load(id, getEntity());
 
         if (load != null) {
-            setEntity((People) load);
+            setEntity((Apartamento) load);
         } else {
-            setEntity(new People());
+            setEntity(new Apartamento());
         }
     }
 
     @Override
     public void save(Object object) {
-        super.save(object, ((People) object).getId());
+        super.save(object, ((Apartamento) object).getId());
     }
 }

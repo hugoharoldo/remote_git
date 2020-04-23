@@ -154,5 +154,14 @@ public class People implements Serializable {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-
+    
+    @Override
+    public String toString(){
+    
+        if (getId() == 0){
+            return "--";
+        }else{
+            return getId() + " - " + getName();
+        }
+    }
 }
