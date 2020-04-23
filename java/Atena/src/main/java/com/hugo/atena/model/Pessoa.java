@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "people")
-public class People implements Serializable {
+public class Pessoa implements Serializable {
 
     @Id
     @SequenceGenerator(name = "pep_id", sequenceName = "seq_people_id", allocationSize = 1)
@@ -38,7 +38,7 @@ public class People implements Serializable {
     @Column(name = "pep_complemento")
     private String complemento;
 
-    public People() {
+    public Pessoa() {
 
     }
 
@@ -117,7 +117,7 @@ public class People implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final People other = (People) obj;
+        final Pessoa other = (Pessoa) obj;
         if (this.id != other.id) {
             return false;
         }

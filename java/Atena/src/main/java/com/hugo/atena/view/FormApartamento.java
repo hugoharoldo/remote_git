@@ -9,7 +9,7 @@ import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.ApartamentoControle;
 import com.hugo.atena.controler.PessoaControle;
 import com.hugo.atena.model.Apartamento;
-import com.hugo.atena.model.People;
+import com.hugo.atena.model.Pessoa;
 import com.hugo.atena.model.PessoaComoboxModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,8 @@ public class FormApartamento extends HDialog {
 
     public PessoaComoboxModel getPessoaComoboxModel() {
 
-        List<People> l = new ArrayList<>();
-        l.add(new People());
+        List<Pessoa> l = new ArrayList<>();
+        l.add(new Pessoa());
         l.addAll(PessoaControle.getPessoas());
 
         PessoaComoboxModel comoboxModel = new PessoaComoboxModel();
@@ -279,8 +279,8 @@ public class FormApartamento extends HDialog {
         Apartamento apartamento = (Apartamento) controleApto.getEntity();
 
         apartamento.setNrApartamento(Integer.parseInt(jTextFieldApto.getText()));
-        apartamento.setProprietario((People) jComboBoxProprietario.getModel().getSelectedItem());
-        apartamento.setResponsavel((People) jComboBoxResponsavel.getModel().getSelectedItem());
+        apartamento.setProprietario((Pessoa) jComboBoxProprietario.getModel().getSelectedItem());
+        apartamento.setResponsavel((Pessoa) jComboBoxResponsavel.getModel().getSelectedItem());
 
 
         return apartamento;

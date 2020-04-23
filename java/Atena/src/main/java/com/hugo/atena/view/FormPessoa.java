@@ -7,7 +7,7 @@ package com.hugo.atena.view;
 
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.PessoaControle;
-import com.hugo.atena.model.People;
+import com.hugo.atena.model.Pessoa;
 
 /**
  *
@@ -281,7 +281,7 @@ public class FormPessoa extends HDialog {
     @Override
     public void preencherTextField(Object object) {
 
-        People p = (People) object;
+        Pessoa p = (Pessoa) object;
 
         jTextFieldCpf.setText(p.getCPFCNPJ());
         jTextFieldNome.setText(p.getName());
@@ -294,7 +294,7 @@ public class FormPessoa extends HDialog {
     @Override
     public Object getValoresInformadosNaTela() {
 
-        People people = (People) controlePessoa.getEntity();
+        Pessoa people = (Pessoa) controlePessoa.getEntity();
 
         people.setCPFCNPJ(jTextFieldCpf.getText());
         people.setComplemento(jTextAreaComplemento.getText());
@@ -314,11 +314,11 @@ public class FormPessoa extends HDialog {
     @Override
     public void atualizaValoresDadosTela() {
         
-        jTextFieldCpf.setText(((People) controlePessoa.getEntity()).getCPFCNPJ());
-        jTextFieldNome.setText(((People) controlePessoa.getEntity()).getName());
-        jTextFieldEmail.setText(((People) controlePessoa.getEntity()).getEmail());
-        jTextFieldFone.setText(((People) controlePessoa.getEntity()).getFone());
-        jTextAreaComplemento.setText(((People) controlePessoa.getEntity()).getComplemento());
+        jTextFieldCpf.setText(((Pessoa) controlePessoa.getEntity()).getCPFCNPJ());
+        jTextFieldNome.setText(((Pessoa) controlePessoa.getEntity()).getName());
+        jTextFieldEmail.setText(((Pessoa) controlePessoa.getEntity()).getEmail());
+        jTextFieldFone.setText(((Pessoa) controlePessoa.getEntity()).getFone());
+        jTextAreaComplemento.setText(((Pessoa) controlePessoa.getEntity()).getComplemento());
         
     }
 }

@@ -32,10 +32,10 @@ public class Apartamento implements Serializable {
     private int nrApartamento;
     @ManyToOne()
     @JoinColumn(name = "apt_proprietario", referencedColumnName = "id", nullable = false)
-    private People proprietario;
+    private Pessoa proprietario;
     @ManyToOne()
     @JoinColumn(name = "apt_responsavel", referencedColumnName = "id", nullable = false)
-    private People responsavel;
+    private Pessoa responsavel;
 
     public Apartamento() {
 
@@ -72,28 +72,28 @@ public class Apartamento implements Serializable {
     /**
      * @return the proprietario
      */
-    public People getProprietario() {
+    public Pessoa getProprietario() {
         return proprietario;
     }
 
     /**
      * @param proprietario the proprietario to set
      */
-    public void setProprietario(People proprietario) {
+    public void setProprietario(Pessoa proprietario) {
         this.proprietario = proprietario;
     }
 
     /**
      * @return the responsavel
      */
-    public People getResponsavel() {
+    public Pessoa getResponsavel() {
         return responsavel;
     }
 
     /**
      * @param responsavel the responsavel to set
      */
-    public void setResponsavel(People responsavel) {
+    public void setResponsavel(Pessoa responsavel) {
         this.responsavel = responsavel;
     }
 

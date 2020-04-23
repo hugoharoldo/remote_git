@@ -6,7 +6,7 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
-import com.hugo.atena.model.People;
+import com.hugo.atena.model.Pessoa;
 import com.hugo.atena.view.TableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import javax.swing.ListSelectionModel;
  */
 public class PessoaControle extends ControlerBasic implements Controler {
 
-    People people;
+    Pessoa people;
 
     public PessoaControle() {
 
@@ -27,7 +27,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
 
     @Override
     public void init() {
-        people = new People();
+        people = new Pessoa();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
 
         if (people == null) {
 
-            people = new People();
+            people = new Pessoa();
         }
 
         return people;
@@ -44,7 +44,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
     @Override
     public void setEntity(Object object) {
 
-        people = (People) object;
+        people = (Pessoa) object;
 
     }
 
@@ -52,7 +52,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
      * Retornam todas as pessoas cadastradas
      * @return 
      */
-    public static List<People> getPessoas() {
+    public static List<Pessoa> getPessoas() {
 
         String jpSql = "from People order";
 
@@ -66,7 +66,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"ID", "Nome", "CPF", "Telefone", "E-mail"};
 
-        for (People p : getPessoas()) {
+        for (Pessoa p : getPessoas()) {
             dados.add(new Object[]{
                 p.getId(),
                 p.getName(),
@@ -103,14 +103,14 @@ public class PessoaControle extends ControlerBasic implements Controler {
         Object load = this.load(id, getEntity());
 
         if (load != null) {
-            setEntity((People) load);
+            setEntity((Pessoa) load);
         } else {
-            setEntity(new People());
+            setEntity(new Pessoa());
         }
     }
 
     @Override
     public void save(Object object) {
-        super.save(object, ((People) object).getId());
+        super.save(object, ((Pessoa) object).getId());
     }
 }

@@ -16,8 +16,8 @@ import javax.swing.ComboBoxModel;
  */
 public class PessoaComoboxModel extends AbstractListModel implements ComboBoxModel {
 
-    private List<People> listaPessoas;
-    private People pessoaSelecionada;
+    private List<Pessoa> listaPessoas;
+    private Pessoa pessoaSelecionada;
 
     public PessoaComoboxModel() {
 
@@ -38,8 +38,8 @@ public class PessoaComoboxModel extends AbstractListModel implements ComboBoxMod
     @Override
     public void setSelectedItem(Object o) {
 
-        if (o instanceof People) {
-            this.setPessoaSelecionada((People) o);
+        if (o instanceof Pessoa) {
+            this.setPessoaSelecionada((Pessoa) o);
             fireContentsChanged(o, 0, this.getListaPessoas().size());
         }
 
@@ -58,14 +58,14 @@ public class PessoaComoboxModel extends AbstractListModel implements ComboBoxMod
     /**
      * @return the listaPessoas
      */
-    public List<People> getListaPessoas() {
+    public List<Pessoa> getListaPessoas() {
         return listaPessoas;
     }
 
     /**
      * @param listaPessoas the listaPessoas to set //
      */
-    public void addPessoas(List<People> listaPessoas) {
+    public void addPessoas(List<Pessoa> listaPessoas) {
         this.listaPessoas.addAll(listaPessoas);
     }
 
@@ -73,7 +73,7 @@ public class PessoaComoboxModel extends AbstractListModel implements ComboBoxMod
      *
      * @param people
      */
-    public void addPessoas(People people) {
+    public void addPessoas(Pessoa people) {
         getListaPessoas().add(people);
         fireContentsChanged(people, 0, this.getListaPessoas().size());
     }
@@ -81,14 +81,14 @@ public class PessoaComoboxModel extends AbstractListModel implements ComboBoxMod
     /**
      * @return the pessoaSelecionada
      */
-    private People getPessoaSelecionada() {
+    private Pessoa getPessoaSelecionada() {
         return pessoaSelecionada;
     }
 
     /**
      * @param pessoaSelecionada the pessoaSelecionada to set
      */
-    private void setPessoaSelecionada(People pessoaSelecionada) {
+    private void setPessoaSelecionada(Pessoa pessoaSelecionada) {
         this.pessoaSelecionada = pessoaSelecionada;
     }
 

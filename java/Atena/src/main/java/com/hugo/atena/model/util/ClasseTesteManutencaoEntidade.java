@@ -6,7 +6,7 @@
 package com.hugo.atena.model.util;
 
 import com.hugo.atena.model.Apartamento;
-import com.hugo.atena.model.People;
+import com.hugo.atena.model.Pessoa;
 import javax.persistence.EntityManager;
 
 /**
@@ -25,9 +25,9 @@ public class ClasseTesteManutencaoEntidade {
 
             EntityManager em = EntityManagerUtil.getEntityManager();
 
-//            People p = em.find(People.class, 5);
+//            Pessoa p = em.find(Pessoa.class, 5);
 
-        People p = new People();
+        Pessoa p = new Pessoa();
         p.setId(5);
 
             Apartamento a = new Apartamento();
