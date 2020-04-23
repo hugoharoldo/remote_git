@@ -209,8 +209,8 @@ public class FormCompetencia extends HDialog {
     @Override
     public void habilitarTextField(boolean habilitar) {
 
-        jTextFieldAno.setEditable(habilitar);
-        jTextFieldMes.setEditable(habilitar);
+        jTextFieldAno.setEnabled(habilitar);
+        jTextFieldMes.setEnabled(habilitar);
 
     }
 

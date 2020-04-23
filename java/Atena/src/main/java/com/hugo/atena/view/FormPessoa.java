@@ -260,11 +260,11 @@ public class FormPessoa extends HDialog {
     @Override
     public void habilitarTextField(boolean habilitar) {
 
-        jTextFieldCpf.setEditable(habilitar);
-        jTextFieldNome.setEditable(habilitar);
-        jTextFieldEmail.setEditable(habilitar);
-        jTextFieldFone.setEditable(habilitar);
-        jTextAreaComplemento.setEditable(habilitar);
+        jTextFieldCpf.setEnabled(habilitar);
+        jTextFieldNome.setEnabled(habilitar);
+        jTextFieldEmail.setEnabled(habilitar);
+        jTextFieldFone.setEnabled(habilitar);
+        jTextAreaComplemento.setEnabled(habilitar);
 
     }
 

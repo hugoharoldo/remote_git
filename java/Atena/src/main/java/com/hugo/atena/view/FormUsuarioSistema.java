@@ -169,8 +169,8 @@ public class FormUsuarioSistema extends HDialog {
 
     @Override
     public void habilitarTextField(boolean habilitar) {
-        jFieldNome.setEditable(habilitar);
-        jFiledSenha.setEditable(habilitar);
+        jFieldNome.setEnabled(habilitar);
+        jFiledSenha.setEnabled(habilitar);
     }
 
     @Override
