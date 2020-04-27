@@ -7,21 +7,19 @@ package com.hugo.atena.view;
 
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.ApartamentoControle;
-import com.hugo.atena.controler.PessoaControle;
 import com.hugo.atena.model.Apartamento;
 import com.hugo.atena.model.Pessoa;
-import com.hugo.atena.model.PessoaComoboxModel;
-import java.util.ArrayList;
-import java.util.List;
+import com.hugo.atena.model.TipoApartamento;
+import com.hugo.atena.view.model.ComboBoxModelPessoa;
+import com.hugo.atena.view.model.ComboBoxModelTipoApartamento;
 
 /**
  *
  * @author hugo
  */
 public class FormApartamento extends HDialog {
-
+    
     private final ApartamentoControle controleApto = new ApartamentoControle();
-//    private PessoaComoboxModel comoboxModel;
 
     /**
      * Creates new form formPeople
@@ -32,26 +30,15 @@ public class FormApartamento extends HDialog {
     public FormApartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
         painelBotoesManutencao.add(this.getPainelSalvador());
-
+        
         painelListaDados.add(this.getPainelNavegacao(), java.awt.BorderLayout.PAGE_END);
-
-        jComboBoxProprietario.setModel(getPessoaComoboxModel());
-        jComboBoxResponsavel.setModel(getPessoaComoboxModel());
-
-    }
-
-    public PessoaComoboxModel getPessoaComoboxModel() {
-
-        List<Pessoa> l = new ArrayList<>();
-        l.add(new Pessoa());
-        l.addAll(PessoaControle.getPessoas());
-
-        PessoaComoboxModel comoboxModel = new PessoaComoboxModel();
-        comoboxModel.addPessoas(l);
-
-        return comoboxModel;
+        
+        jComboBoxProprietario.setModel(ComboBoxModelPessoa.getModel());
+        jComboBoxResponsavel.setModel(ComboBoxModelPessoa.getModel());
+        jComboBoxTipo.setModel(ComboBoxModelTipoApartamento.getModel());
+        
     }
 
     /**
@@ -73,6 +60,9 @@ public class FormApartamento extends HDialog {
         jLabel2 = new javax.swing.JLabel();
         jComboBoxProprietario = new javax.swing.JComboBox<>();
         jComboBoxResponsavel = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxTipo = new javax.swing.JComboBox<>();
+        jCheckBoxSindico = new javax.swing.JCheckBox();
         painelBotoesManutencao = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,35 +100,39 @@ public class FormApartamento extends HDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Apto.:");
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Tipo:");
+
+        jCheckBoxSindico.setText("Síndico");
+
         javax.swing.GroupLayout painelCamposPersonaizadosLayout = new javax.swing.GroupLayout(painelCamposPersonaizados);
         painelCamposPersonaizados.setLayout(painelCamposPersonaizadosLayout);
         painelCamposPersonaizadosLayout.setHorizontalGroup(
             painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
-                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelCamposPersonaizadosLayout.createSequentialGroup()
-                        .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabel2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposPersonaizadosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
-                                .addComponent(jTextFieldApto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE))
-                            .addComponent(jComboBoxProprietario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelCamposPersonaizadosLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxResponsavel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(78, 78, 78))
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
+                        .addComponent(jTextFieldApto, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxSindico, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 245, Short.MAX_VALUE))
+            .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBoxTipo, 0, 350, Short.MAX_VALUE)
+                    .addComponent(jComboBoxResponsavel, 0, 350, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        painelCamposPersonaizadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4});
+        painelCamposPersonaizadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel4});
 
         painelCamposPersonaizadosLayout.setVerticalGroup(
             painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +140,8 @@ public class FormApartamento extends HDialog {
                 .addContainerGap()
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldApto)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jCheckBoxSindico))
                 .addGap(6, 6, 6)
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -155,7 +150,11 @@ public class FormApartamento extends HDialog {
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
 
         painelCadastro.add(painelCamposPersonaizados, java.awt.BorderLayout.NORTH);
@@ -174,7 +173,7 @@ public class FormApartamento extends HDialog {
     private void jTextFieldAptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAptoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAptoActionPerformed
-
+    
 
     private void jTabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPaneFocusGained
         // TODO add your handling code here:
@@ -234,8 +233,11 @@ public class FormApartamento extends HDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBoxSindico;
     private javax.swing.JComboBox<String> jComboBoxProprietario;
     private javax.swing.JComboBox<String> jComboBoxResponsavel;
+    private javax.swing.JComboBox<String> jComboBoxTipo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -252,56 +254,57 @@ public class FormApartamento extends HDialog {
         jTextFieldApto.setEnabled(habilitar);
         jComboBoxProprietario.setEnabled(habilitar);
         jComboBoxResponsavel.setEnabled(habilitar);
+        jComboBoxTipo.setEnabled(habilitar);
+        jCheckBoxSindico.setEnabled(habilitar);
     }
     
     @Override
     public void limparTextField() {
         
         jTextFieldApto.setText("");
-        jComboBoxProprietario.getModel().setSelectedItem(new Apartamento());
-        jComboBoxResponsavel.getModel().setSelectedItem(new Apartamento());
+        jComboBoxProprietario.getModel().setSelectedItem(new Pessoa());
+        jComboBoxResponsavel.getModel().setSelectedItem(new Pessoa());
+        jComboBoxTipo.getModel().setSelectedItem(new TipoApartamento());
+        jCheckBoxSindico.setSelected(false);
     }
-
+    
     @Override
     public void preencherTextField(Object object) {
-
+        
         Apartamento apartamento = (Apartamento) object;
         
         jTextFieldApto.setText(String.valueOf(apartamento.getNrApartamento()));
         jComboBoxProprietario.getModel().setSelectedItem(apartamento.getProprietario());
         jComboBoxResponsavel.getModel().setSelectedItem(apartamento.getResponsavel());
-
+        jComboBoxTipo.getModel().setSelectedItem(apartamento.getTipoApartamento());
+        jCheckBoxSindico.setSelected(apartamento.isSindico());
+        
     }
-
+    
     @Override
     public Object getValoresInformadosNaTela() {
-
+        
         Apartamento apartamento = (Apartamento) controleApto.getEntity();
-
+        
         apartamento.setNrApartamento(Integer.parseInt(jTextFieldApto.getText()));
         apartamento.setProprietario((Pessoa) jComboBoxProprietario.getModel().getSelectedItem());
         apartamento.setResponsavel((Pessoa) jComboBoxResponsavel.getModel().getSelectedItem());
-
-
+        apartamento.setTipoApartamento((TipoApartamento) jComboBoxTipo.getModel().getSelectedItem());
+        apartamento.setSindico(jCheckBoxSindico.isSelected());
+        
         return apartamento;
-
+        
     }
-
+    
     @Override
     public Controler getControler() {
         return this.controleApto;
     }
-
+    
     @Override
     public void atualizaValoresDadosTela() {
-
         
-        Apartamento apartamento = ((Apartamento) controleApto.getEntity());
+        preencherTextField(controleApto.getEntity());
         
-        jTextFieldApto.setText(String.valueOf(apartamento.getNrApartamento()));
-        
-        jComboBoxProprietario.getModel().setSelectedItem(apartamento.getProprietario());
-        jComboBoxResponsavel.getModel().setSelectedItem(apartamento.getResponsavel());
-
     }
 }

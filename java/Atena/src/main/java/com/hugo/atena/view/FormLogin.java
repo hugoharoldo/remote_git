@@ -80,15 +80,16 @@ public class FormLogin extends javax.swing.JFrame {
         if (UsuarioSistemaControle.isUsuarioAutorizado(jTextFieldUsuario.getText(),
                 jPasswordFieldSenha.getText())) {
 
-            FormPrincipal fp = new FormPrincipal();
-            fp.setVisible(true);
 
-            dispose();
 
         } else {
             JOptionPane.showMessageDialog(null, "Acesso não autorizado");
         }
 
+          FormPrincipal fp = new FormPrincipal();
+        fp.setVisible(true);
+
+        dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

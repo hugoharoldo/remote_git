@@ -6,7 +6,7 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
-import com.hugo.atena.model.Apartamento;
+import com.hugo.atena.model.TipoApartamento;
 import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,34 +17,34 @@ import javax.swing.ListSelectionModel;
  *
  * @author hugo
  */
-public class ApartamentoControle extends ControlerBasic implements Controler {
+public class TipoApartamentoControle extends ControlerBasic implements Controler {
 
-    Apartamento apartamento;
+    TipoApartamento tipoApartamento;
 
-    public ApartamentoControle() {
+    public TipoApartamentoControle() {
 
     }
 
     @Override
     public void init() {
-        apartamento = new Apartamento();
+        tipoApartamento = new TipoApartamento();
     }
 
     @Override
     public Object getEntity() {
 
-        if (apartamento == null) {
+        if (tipoApartamento == null) {
 
-            apartamento = new Apartamento();
+            tipoApartamento = new TipoApartamento();
         }
 
-        return apartamento;
+        return tipoApartamento;
     }
 
     @Override
     public void setEntity(Object object) {
 
-        apartamento = (Apartamento) object;
+        tipoApartamento = (TipoApartamento) object;
 
     }
 
@@ -52,16 +52,16 @@ public class ApartamentoControle extends ControlerBasic implements Controler {
     public void updateDataTable(JTable jTable) {
 
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Apartamento", "Síndico", "Tipo", "Responsável" , "Proprietário"};
+        String[] colunas = new String[]{"ID", "Tipo", "Valor Condomínio", "Fundo Reserva"};
 
-        for (Apartamento p : Apartamento.getApartamentos()) {
+     
+
+        for (TipoApartamento p : TipoApartamento.getTipoApartamentos()) {
             dados.add(new Object[]{
                 p.getId(),
-                p.getNrApartamento(),
-                p.isSindico() ? "Sim" : "Não",
-                p.getTipoApartamento().toString(),
-                p.getResponsavel().getName(),
-                p.getProprietario().getName()});
+                p.getDescricao(),
+                p.getVlrCondominio(),
+                p.getVlrFundoReserva()});
         }
 
         TableModel model = new TableModel(dados, colunas);
@@ -92,14 +92,14 @@ public class ApartamentoControle extends ControlerBasic implements Controler {
         Object load = this.load(id, getEntity());
 
         if (load != null) {
-            setEntity((Apartamento) load);
+            setEntity((TipoApartamento) load);
         } else {
-            setEntity(new Apartamento());
+            setEntity(new TipoApartamento());
         }
     }
 
     @Override
     public void save(Object object) {
-        super.save(object, ((Apartamento) object).getId());
+        super.save(object, ((TipoApartamento) object).getId());
     }
 }

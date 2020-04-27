@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hugo.atena.view;
+package com.hugo.atena.view.model;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -34,10 +34,16 @@ public class TableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int numLin, int numCol) {
-        
+        try {
+            
         Object[] linha = (Object[]) getLinhas().get(numLin);
 
         return linha[numCol];
+        
+        } catch (Exception e) {
+            System.out.println(e);
+            return -1;
+        }
     }
 
     public String getColumnName(int numCol) {

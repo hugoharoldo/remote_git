@@ -5,7 +5,9 @@
  */
 package com.hugo.atena.model;
 
+import com.hugo.atena.model.util.EntityManagerUtil;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +32,17 @@ public class Apartamento implements Serializable {
     private int id;
     @Column(name = "apt_numero", nullable = false, unique = true)
     private int nrApartamento;
+    @Column(name = "apt_sindico", nullable = true)
+    private boolean sindico;
     @ManyToOne()
     @JoinColumn(name = "apt_proprietario", referencedColumnName = "id", nullable = false)
     private Pessoa proprietario;
     @ManyToOne()
     @JoinColumn(name = "apt_responsavel", referencedColumnName = "id", nullable = false)
     private Pessoa responsavel;
+    @ManyToOne()
+    @JoinColumn(name = "apt_tipo", referencedColumnName = "id", nullable = false)
+    private TipoApartamento tipoApartamento;
 
     public Apartamento() {
 
@@ -120,6 +127,55 @@ public class Apartamento implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public static List<Apartamento> getApartamentos() {
+
+        String jpSql = "from Apartamento order by nrApartamento";
+
+        return EntityManagerUtil.getEntityManager().createQuery(jpSql).getResultList();
+
+    }
+
+    @Override
+    public String toString() {
+
+        if (getNrApartamento() > 0) {
+
+            return getNrApartamento()
+                    + (getResponsavel() != null ? (" - " + getResponsavel().getName()) : "");
+
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * @return the tipoApartamento
+     */
+    public TipoApartamento getTipoApartamento() {
+        return tipoApartamento;
+    }
+
+    /**
+     * @param tipoApartamento the tipoApartamento to set
+     */
+    public void setTipoApartamento(TipoApartamento tipoApartamento) {
+        this.tipoApartamento = tipoApartamento;
+    }
+
+    /**
+     * @return the sindico
+     */
+    public boolean isSindico() {
+        return sindico;
+    }
+
+    /**
+     * @param sindico the sindico to set
+     */
+    public void setSindico(boolean sindico) {
+        this.sindico = sindico;
     }
 
 }

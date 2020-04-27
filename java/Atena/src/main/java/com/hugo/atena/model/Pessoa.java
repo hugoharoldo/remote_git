@@ -121,9 +121,6 @@ public class Pessoa implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.CPFCNPJ, other.CPFCNPJ)) {
-            return false;
-        }
         return true;
     }
 
@@ -159,7 +156,7 @@ public class Pessoa implements Serializable {
     public String toString(){
     
         if (getId() == 0){
-            return "--";
+            return "";
         }else{
             return getId() + " - " + getName();
         }

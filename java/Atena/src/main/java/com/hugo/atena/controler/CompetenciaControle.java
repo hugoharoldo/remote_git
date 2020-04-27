@@ -6,10 +6,8 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.model.Competencia;
-import com.hugo.atena.model.util.EntityManagerUtil;
-import com.hugo.atena.view.TableModel;
+import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -66,16 +64,11 @@ public class CompetenciaControle extends ControlerBasic implements Controler {
 
     @Override
     public void updateDataTable(JTable table) {
-        
-              ArrayList dados = new ArrayList();
+
+        ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"ID", "Ano", "Mês"};
 
-        String jpSql = "from Competencia order";
-
-        List<Competencia> list = EntityManagerUtil.getEntityManager()
-                .createQuery(jpSql).getResultList();
-
-        for (Competencia p : list) {
+        for (Competencia p : Competencia.getCompetencias()) {
             dados.add(new Object[]{
                 p.getId(),
                 p.getAno(),
@@ -94,11 +87,7 @@ public class CompetenciaControle extends ControlerBasic implements Controler {
         table.getColumnModel().getColumn(2).setPreferredWidth(100);
         table.getColumnModel().getColumn(2).setResizable(true);
 
-//        table.getTableHeader().setResizingAllowed(false);
-
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
     }
-
 }

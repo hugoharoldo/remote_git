@@ -6,16 +6,16 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.controler.Controler;
-import com.hugo.atena.controler.PessoaControle;
-import com.hugo.atena.model.Pessoa;
+import com.hugo.atena.controler.TipoApartamentoControle;
+import com.hugo.atena.model.TipoApartamento;
 
 /**
  *
  * @author hugo
  */
-public class FormPessoa extends HDialog {
+public class FormTipoApartamento extends HDialog {
 
-    private final PessoaControle controlePessoa = new PessoaControle();
+    private final TipoApartamentoControle controleTipoApartamento = new TipoApartamentoControle();
 
     /**
      * Creates new form formPeople
@@ -23,7 +23,7 @@ public class FormPessoa extends HDialog {
      * @param parent
      * @param modal
      */
-    public FormPessoa(java.awt.Frame parent, boolean modal) {
+    public FormTipoApartamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -46,17 +46,12 @@ public class FormPessoa extends HDialog {
         painelListaDados = new javax.swing.JPanel();
         painelCadastro = new javax.swing.JPanel();
         painelCamposPersonaizados = new javax.swing.JPanel();
-        jTextFieldEmail = new javax.swing.JTextField();
+        jTextFieldVlrFundoReserva = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldCpf = new javax.swing.JTextField();
+        jTextFieldVlrCondominio = new javax.swing.JTextField();
+        jTextFieldDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldFone = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaComplemento = new javax.swing.JTextArea();
         painelBotoesManutencao = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,7 +64,7 @@ public class FormPessoa extends HDialog {
         });
 
         painelListaDados.setLayout(new java.awt.BorderLayout());
-        jTabbedPane.addTab("Lista de pessoas", painelListaDados);
+        jTabbedPane.addTab("Lista de tipo de apartamento", painelListaDados);
 
         painelCadastro.setLayout(new java.awt.BorderLayout());
 
@@ -80,29 +75,19 @@ public class FormPessoa extends HDialog {
         });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("E-mail:");
+        jLabel4.setText("Fundo reserva:");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Condomínio:");
 
-        jTextFieldCpf.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCpfActionPerformed(evt);
+                jTextFieldDescricaoActionPerformed(evt);
             }
         });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("CPF:");
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Fone:");
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Comple:");
-
-        jTextAreaComplemento.setColumns(20);
-        jTextAreaComplemento.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaComplemento);
+        jLabel2.setText("Descrição:");
 
         javax.swing.GroupLayout painelCamposPersonaizadosLayout = new javax.swing.GroupLayout(painelCamposPersonaizados);
         painelCamposPersonaizados.setLayout(painelCamposPersonaizadosLayout);
@@ -118,52 +103,36 @@ public class FormPessoa extends HDialog {
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVlrCondominio, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldFone, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextFieldVlrFundoReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        painelCamposPersonaizadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6});
+        painelCamposPersonaizadosLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4});
 
         painelCamposPersonaizadosLayout.setVerticalGroup(
             painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCpf)
+                    .addComponent(jTextFieldDescricao)
                     .addComponent(jLabel2))
                 .addGap(6, 6, 6)
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldNome))
+                    .addComponent(jTextFieldVlrCondominio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldEmail)
+                    .addComponent(jTextFieldVlrFundoReserva)
                     .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldFone)
-                    .addGroup(painelCamposPersonaizadosLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelCamposPersonaizadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -172,7 +141,7 @@ public class FormPessoa extends HDialog {
         painelBotoesManutencao.setLayout(new java.awt.GridLayout(1, 0));
         painelCadastro.add(painelBotoesManutencao, java.awt.BorderLayout.SOUTH);
 
-        jTabbedPane.addTab("Pessoa", painelCadastro);
+        jTabbedPane.addTab("Tipo apartamento", painelCadastro);
 
         getContentPane().add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
@@ -180,9 +149,9 @@ public class FormPessoa extends HDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCpfActionPerformed
+    private void jTextFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCpfActionPerformed
+    }//GEN-LAST:event_jTextFieldDescricaoActionPerformed
 
 
     private void jTabbedPaneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPaneFocusGained
@@ -210,14 +179,18 @@ public class FormPessoa extends HDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormTipoApartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormTipoApartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormTipoApartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormTipoApartamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -226,7 +199,7 @@ public class FormPessoa extends HDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormPessoa dialog = new FormPessoa(new javax.swing.JFrame(), true);
+                FormTipoApartamento dialog = new FormTipoApartamento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -242,15 +215,10 @@ public class FormPessoa extends HDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTextArea jTextAreaComplemento;
-    private javax.swing.JTextField jTextFieldCpf;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldFone;
-    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldVlrCondominio;
+    private javax.swing.JTextField jTextFieldVlrFundoReserva;
     private javax.swing.JPanel painelBotoesManutencao;
     private javax.swing.JPanel painelCadastro;
     private javax.swing.JPanel painelCamposPersonaizados;
@@ -260,61 +228,51 @@ public class FormPessoa extends HDialog {
     @Override
     public void habilitarTextField(boolean habilitar) {
 
-        jTextFieldCpf.setEnabled(habilitar);
-        jTextFieldNome.setEnabled(habilitar);
-        jTextFieldEmail.setEnabled(habilitar);
-        jTextFieldFone.setEnabled(habilitar);
-        jTextAreaComplemento.setEnabled(habilitar);
+        jTextFieldDescricao.setEnabled(habilitar);
+        jTextFieldVlrCondominio.setEnabled(habilitar);
+        jTextFieldVlrFundoReserva.setEnabled(habilitar);
 
     }
 
     @Override
     public void limparTextField() {
 
-        jTextFieldCpf.setText("");
-        jTextFieldNome.setText("");
-        jTextFieldEmail.setText("");
-        jTextFieldFone.setText("");
-        jTextAreaComplemento.setText("");
+        jTextFieldDescricao.setText("");
+        jTextFieldVlrCondominio.setText("");
+        jTextFieldVlrFundoReserva.setText("");
+
     }
 
     @Override
     public void preencherTextField(Object object) {
 
-        Pessoa p = (Pessoa) object;
+        TipoApartamento p = (TipoApartamento) object;
 
-        jTextFieldCpf.setText(p.getCPFCNPJ());
-        jTextFieldNome.setText(p.getName());
-        jTextFieldEmail.setText(p.getEmail());
-        jTextFieldFone.setText(p.getFone());
-        jTextAreaComplemento.setText(p.getComplemento());
+        jTextFieldDescricao.setText(p.getDescricao());
+        jTextFieldVlrCondominio.setText(String.valueOf(p.getVlrCondominio()));
+        jTextFieldVlrFundoReserva.setText(String.valueOf(p.getVlrFundoReserva()));
 
     }
 
     @Override
     public Object getValoresInformadosNaTela() {
 
-        Pessoa people = (Pessoa) controlePessoa.getEntity();
+        TipoApartamento apartamento = (TipoApartamento) controleTipoApartamento.getEntity();
 
-        people.setCPFCNPJ(jTextFieldCpf.getText());
-        people.setComplemento(jTextAreaComplemento.getText());
-        people.setEmail(jTextFieldEmail.getText());
-        people.setFone(jTextFieldFone.getText());
-        people.setName(jTextFieldNome.getText());
+        apartamento.setDescricao(jTextFieldDescricao.getText());
+        apartamento.setVlrCondominio(Double.valueOf(jTextFieldVlrCondominio.getText()));
+        apartamento.setVlrFundoReserva(Double.valueOf(jTextFieldVlrFundoReserva.getText()));
 
-        return people;
-
+        return apartamento;
     }
 
     @Override
     public Controler getControler() {
-        return this.controlePessoa;
+        return this.controleTipoApartamento;
     }
 
     @Override
     public void atualizaValoresDadosTela() {
-        
-        preencherTextField(controlePessoa.getEntity());
-        
+        preencherTextField(controleTipoApartamento.getEntity());
     }
 }

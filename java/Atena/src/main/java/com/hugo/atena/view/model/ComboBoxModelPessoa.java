@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hugo.atena.model;
+package com.hugo.atena.view.model;
 
+import com.hugo.atena.controler.PessoaControle;
+import com.hugo.atena.model.Pessoa;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
@@ -14,12 +16,12 @@ import javax.swing.ComboBoxModel;
  *
  * @author hugo
  */
-public class PessoaComoboxModel extends AbstractListModel implements ComboBoxModel {
+public class ComboBoxModelPessoa extends AbstractListModel implements ComboBoxModel {
 
     private List<Pessoa> listaPessoas;
     private Pessoa pessoaSelecionada;
 
-    public PessoaComoboxModel() {
+    public ComboBoxModelPessoa() {
 
         this.listaPessoas = new ArrayList<>();
 
@@ -90,6 +92,14 @@ public class PessoaComoboxModel extends AbstractListModel implements ComboBoxMod
      */
     private void setPessoaSelecionada(Pessoa pessoaSelecionada) {
         this.pessoaSelecionada = pessoaSelecionada;
+    }
+    
+    public static ComboBoxModelPessoa getModel() {
+
+        ComboBoxModelPessoa comoboxModel = new ComboBoxModelPessoa();
+        comoboxModel.addPessoas(PessoaControle.getPessoas());
+
+        return comoboxModel;
     }
 
 }

@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -375,12 +376,18 @@ public abstract class HDialog extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
 
-        // TODO add your handling code here:
-        getControler().save(getValoresInformadosNaTela());
-        modoInicialComRegistro();
+        try {
 
-        if (getListagemDadosTabela() != null) {
-            getControler().updateDataTable(getListagemDadosTabela());
+            // TODO add your handling code here:
+            getControler().save(getValoresInformadosNaTela());
+            modoInicialComRegistro();
+
+            if (getListagemDadosTabela() != null) {
+                getControler().updateDataTable(getListagemDadosTabela());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
     }

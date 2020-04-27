@@ -160,10 +160,19 @@ public class HNumber extends BigDecimal {
 
     public static HNumber getNumber(String string) throws NumberException {
 
-        if (string == null || !string.trim().isEmpty()) {
+        if (string == null || string.trim().isEmpty()) {
             throw new NumberException("Invalid number");
         } else {
             return new HNumber(string.replace(",", ""));
+        }
+    }
+    
+    public static boolean isInteger(String text) {
+        try {
+            Integer i = Integer.parseInt(text);
+            return i != null;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

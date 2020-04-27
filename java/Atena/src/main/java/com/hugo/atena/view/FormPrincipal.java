@@ -33,7 +33,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuRegister = new javax.swing.JMenu();
         jMenuIPeople = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
@@ -59,6 +62,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         jMenuRegister.add(jMenuItem3);
 
+        jMenuItem5.setText("Tipo Apartamento");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem5);
+
         jMenuItem2.setText("Competencia");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +77,22 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRegister.add(jMenuItem2);
+
+        jMenuItem4.setText("Medição de Gás");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem4);
+
+        jMenuItem6.setText("Despesas Compartilhadas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem6);
 
         jMenuItem1.setText("Usuários do Sistemas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -143,13 +170,13 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        
+
         FormCompetencia frmPeople = new FormCompetencia(this, true);
         frmPeople.setTitle("Manutenção de Competencias");
         frmPeople.setLocationRelativeTo(null);
         frmPeople.setResizable(false);
         frmPeople.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -160,8 +187,36 @@ public class FormPrincipal extends javax.swing.JFrame {
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        FormMedicaoGas frm = new FormMedicaoGas(this, true);
+        frm.setTitle("Manutenção de Apartamentos");
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        FormTipoApartamento frm = new FormTipoApartamento(this, true);
+        frm.setTitle("Manutenção de Tipos de Apartamento");
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        FormDespesaCompartilhada frm = new FormDespesaCompartilhada(this, true);
+        frm.setTitle("Manutenção de despesas");
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +261,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

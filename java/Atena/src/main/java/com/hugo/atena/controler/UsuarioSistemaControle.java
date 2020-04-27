@@ -7,7 +7,7 @@ package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.model.UsuarioSistema;
-import com.hugo.atena.view.TableModel;
+import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;

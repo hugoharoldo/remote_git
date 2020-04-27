@@ -36,7 +36,7 @@ public interface Controler {
 
     public void remove(Object object);
 
-    public void save(Object object);
+    public void save(Object object) throws Exception;
 
     public void updateDataTable(JTable table);
 

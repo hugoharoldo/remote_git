@@ -5,7 +5,9 @@
  */
 package com.hugo.atena.model;
 
+import com.hugo.atena.model.util.EntityManagerUtil;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -79,9 +81,8 @@ public class Competencia implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.ano);
-        hash = 37 * hash + Objects.hashCode(this.mes);
+        int hash = 7;
+        hash = 97 * hash + this.id;
         return hash;
     }
 
@@ -97,7 +98,26 @@ public class Competencia implements Serializable {
             return false;
         }
         final Competencia other = (Competencia) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         return true;
     }
 
+    @Override
+    public String toString() {
+
+        if (getId() == 0) {
+            return "";
+        } else {
+            return getAno() + " - " + getMes();
+        }
+    }
+
+    public static List<Competencia> getCompetencias() {
+
+        String jpSql = "from Competencia order by cpt_ano desc, cpt_mes desc";
+
+        return EntityManagerUtil.getEntityManager().createQuery(jpSql).getResultList();
+    }
 }

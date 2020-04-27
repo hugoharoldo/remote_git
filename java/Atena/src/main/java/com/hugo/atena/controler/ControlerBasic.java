@@ -6,6 +6,7 @@
 package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -18,7 +19,28 @@ public abstract class ControlerBasic {
     public ControlerBasic() {
 
     }
-    
+
+    public void save(ArrayList list) {
+
+        try {
+
+            EntityManager em = EntityManagerUtil.getEntityManager();
+
+            em.getTransaction().begin();
+
+            for (Object object : list) {
+                em.persist(object);
+            }
+
+            em.getTransaction().commit();
+
+            JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+        }
+    }
+
     public void save(Object object, int idObjeto) {
 
         try {

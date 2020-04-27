@@ -7,7 +7,7 @@ package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.model.Pessoa;
-import com.hugo.atena.view.TableModel;
+import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -54,7 +54,7 @@ public class PessoaControle extends ControlerBasic implements Controler {
      */
     public static List<Pessoa> getPessoas() {
 
-        String jpSql = "from People order";
+        String jpSql = "from Pessoa order";
 
         return EntityManagerUtil.getEntityManager().createQuery(jpSql).getResultList();
 

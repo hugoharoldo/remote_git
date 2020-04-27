@@ -251,7 +251,7 @@ public class FormCompetencia extends HDialog {
     @Override
     public void atualizaValoresDadosTela() {
 
-        jTextFieldAno.setText(String.valueOf(((Competencia) controleCompetencia.getEntity()).getAno()));
-        jTextFieldMes.setText(String.valueOf(((Competencia) controleCompetencia.getEntity()).getMes()));
+        preencherTextField(controleCompetencia.getEntity());
+    
     }
 }
