@@ -5,6 +5,7 @@
  */
 package com.hugo.atena.controler;
 
+import com.hugo.atena.model.Competencia;
 import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.model.DespesaCompartilhada;
 import com.hugo.atena.view.model.TableModel;
@@ -128,11 +129,13 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
         
         if (parcelas > 1){
             
+            CompetenciaControle cc = new CompetenciaControle();
+            Competencia c = dc.getCompetencia();
+            
             double valorParcela = dc.getValor();
             double somaValorParcelaLancado = 0;
             
             BigDecimal valorParcelado = new BigDecimal(valorParcela / parcelas).setScale(2, RoundingMode.HALF_EVEN);
-            
             ArrayList<DespesaCompartilhada> despesas = new ArrayList();
             for (int i = 0; i < parcelas; i++) {
                 
@@ -140,16 +143,22 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
                 
                 d.setValor(valorParcelado.doubleValue());
                 d.setParcelas(1 + i);
-                        
+                d.setCompetencia(c);
+                
                 despesas.add(d);
                 
                 somaValorParcelaLancado += valorParcelado.doubleValue();
+            
+                //Se ainda tem mais um registro para iterar
+                if (i < parcelas){
+                    c = cc.getProximaCompetencia(c.getAno(), c.getMes());
+                }
             }
             
-            if (valorParcela < somaValorParcelaLancado){
+            if (valorParcela > somaValorParcelaLancado){
                 
-                double diferenca =  valorParcelado.doubleValue() - somaValorParcelaLancado; 
-                double valorCorrigido = diferenca + despesas.get(0).getValor();
+                BigDecimal diferenca = new BigDecimal(valorParcelado.doubleValue() - somaValorParcelaLancado).setScale(2, RoundingMode.HALF_EVEN);
+                double valorCorrigido = diferenca.doubleValue() + despesas.get(0).getValor();
                 
                 despesas.get(0).setValor(valorCorrigido);
             }

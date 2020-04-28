@@ -8,7 +8,6 @@ package com.hugo.atena.model;
 import com.hugo.atena.model.util.EntityManagerUtil;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "competencia")
-public class Competencia implements Serializable {
+public class Competencia implements Serializable, Cloneable {
 
     @Id
     @SequenceGenerator(name = "cpt_id", sequenceName = "seq_competencia_id", allocationSize = 1)
@@ -119,5 +118,9 @@ public class Competencia implements Serializable {
         String jpSql = "from Competencia order by cpt_ano desc, cpt_mes desc";
 
         return EntityManagerUtil.getEntityManager().createQuery(jpSql).getResultList();
+    }
+    
+    public Competencia clone() throws CloneNotSupportedException{
+        return (Competencia) super.clone();
     }
 }
