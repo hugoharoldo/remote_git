@@ -124,4 +124,35 @@ public class CompetenciaControle extends ControlerBasic implements Controler {
 
         }
     }
+    
+    public Competencia getAnteriorCompetencia(int ano, int mes) throws Exception {
+        
+        if (mes == 1) {
+            mes = 12;
+            ano = ano - 1;
+        } else {
+            mes = mes - 1;
+        }
+
+        String jpSql = "from Competencia where cpt_ano = ?1 and cpt_mes = ?2";
+
+        Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
+        query.setParameter(1, ano);
+        query.setParameter(2, mes);
+
+        List list = query.getResultList();
+        if (list != null && !list.isEmpty()) {
+            return (Competencia) list.get(0);
+        } else {
+            
+            Competencia c1 = new Competencia();
+            c1.setAno(ano);
+            c1.setMes(mes);
+
+            super.save(c1, 0);
+
+            return c1;
+
+        }
+    }
 }

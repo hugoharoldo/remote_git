@@ -12,6 +12,7 @@ import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Query;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -130,9 +131,26 @@ public class MedicaoGasControler extends ControlerBasic implements Controler {
         super.save(object, ((MedicaoGas) object).getId());
     }
 
-    public int getUltimaMedicaoGas(final Apartamento a, final Competencia c) {
+    public int getUltimaMedicaoGas(final Apartamento a, final Competencia c) throws Exception {
 
-        return 68328;
-        
+        Competencia anterior = new CompetenciaControle().getAnteriorCompetencia(c.getAno(), c.getMes());
+
+        String jpSql = "from MedicaoGas where apartamento_id = ?1 and competencia_id = ?2";
+
+        Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
+        query.setParameter(1, a.getId());
+        query.setParameter(2, anterior.getId());
+
+        List list = query.getResultList();
+
+        if (list != null && !list.isEmpty()) {
+            
+            MedicaoGas mg = (MedicaoGas) list.get(0);
+            
+            return mg.getLeituraAtual();
+        } else {
+            return 0;
+        }
+
     }
 }
