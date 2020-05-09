@@ -47,8 +47,20 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel2.setText("Senha:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 70, 43, 17);
+
+        jPasswordFieldSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldSenhaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jPasswordFieldSenha);
         jPasswordFieldSenha.setBounds(20, 90, 210, 29);
+
+        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUsuarioActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextFieldUsuario);
         jTextFieldUsuario.setBounds(20, 40, 210, 29);
 
@@ -80,16 +92,15 @@ public class FormLogin extends javax.swing.JFrame {
         if (UsuarioSistemaControle.isUsuarioAutorizado(jTextFieldUsuario.getText(),
                 jPasswordFieldSenha.getText())) {
 
+            FormPrincipal fp = new FormPrincipal();
+            fp.setVisible(true);
 
+            dispose();
 
         } else {
             JOptionPane.showMessageDialog(null, "Acesso não autorizado");
         }
 
-          FormPrincipal fp = new FormPrincipal();
-        fp.setVisible(true);
-
-        dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -98,6 +109,16 @@ public class FormLogin extends javax.swing.JFrame {
         dispose();
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
+        // TODO add your handling code here:
+        jPasswordFieldSenha.requestFocus();
+    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
+
+    private void jPasswordFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaActionPerformed
+        // TODO add your handling code here:
+        jButton1.requestFocus();
+    }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
 
     /**
      * @param args the command line arguments

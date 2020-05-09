@@ -26,18 +26,23 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
 
     }
 
-    @Override
-    public void updateDataTable(JTable jTable) {
-
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome"};
+    private static List<UsuarioSistema> getUsuarios() {
 
         String jpSql = "from UsuarioSistema order";
 
         List<UsuarioSistema> list = EntityManagerUtil.getEntityManager()
                 .createQuery(jpSql).getResultList();
 
-        for (UsuarioSistema us : list) {
+        return list;
+    }
+
+    @Override
+    public void updateDataTable(JTable jTable) {
+
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"ID", "Nome"};
+
+        for (UsuarioSistema us : getUsuarios()) {
             dados.add(new Object[]{
                 us.getId(),
                 us.getNome()});
@@ -95,9 +100,22 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
         super.save(object, ((UsuarioSistema) object).getId());
     }
 
+    private static boolean registraPrimeiroUsuario(String usuario, String senha) {
+
+        UsuarioSistema us = new UsuarioSistema();
+        us.setNome(usuario);
+        us.setSenha(senha);
+
+        UsuarioSistemaControle usc = new UsuarioSistemaControle();
+        usc.save(us);
+
+        return true;
+
+    }
+
     public static boolean isUsuarioAutorizado(String usuario, String senha) {
 
-        if (usuario == null || senha == null) {
+        if (usuario == null || senha == null || usuario.isEmpty() || senha.isEmpty()) {
             return false;
         }
 
@@ -108,14 +126,29 @@ public class UsuarioSistemaControle extends ControlerBasic implements Controler 
             Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
             query.setParameter(1, usuario);
 
-            UsuarioSistema us = (UsuarioSistema) query.getSingleResult();
+            List list = query.getResultList();
 
-            return senha.equals(us.getSenha());
-            
+            if (list.isEmpty()) {
+
+                list = getUsuarios();
+
+                if (list.isEmpty()) {
+                    return registraPrimeiroUsuario(usuario, senha);
+                } else {
+                    return false;
+                }
+
+            } else {
+
+                UsuarioSistema us = (UsuarioSistema) list.get(0);
+
+                return senha.equals(us.getSenha());
+            }
+
         } catch (Exception e) {
 
             e.printStackTrace();
-            
+
             return false;
         }
 
