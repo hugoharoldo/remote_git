@@ -38,6 +38,6 @@ public interface Controler {
 
     public void save(Object object) throws Exception;
 
-    public void updateDataTable(JTable table);
+    public void updateDataTable(JTable table) throws Exception;
 
 }

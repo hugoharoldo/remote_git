@@ -38,6 +38,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
 
@@ -101,6 +102,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuRegister.add(jMenuItem1);
+
+        jMenuItem7.setText("Calular Condomínio");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenuRegister.add(jMenuItem7);
 
         menuBar.add(jMenuRegister);
 
@@ -218,6 +227,17 @@ public class FormPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        
+        FormLancamentoCondominio frm = new FormLancamentoCondominio(this, true);
+        frm.setTitle("Lancamento condomínio");
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -264,6 +284,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

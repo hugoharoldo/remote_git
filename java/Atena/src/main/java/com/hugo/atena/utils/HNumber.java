@@ -16,7 +16,7 @@ import java.math.RoundingMode;
 public class HNumber extends BigDecimal {
 
     public static final int SCALE = 2;
-
+    
     public HNumber(BigDecimal bigDecimal) {
         super(bigDecimal.toString());
         this.setScale(SCALE, RoundingMode.HALF_UP);
@@ -112,7 +112,7 @@ public class HNumber extends BigDecimal {
     }
 
     public HNumber rounds() throws NumberException {
-        return rounds(SCALE);
+        return new HNumber(setScale(SCALE, RoundingMode.CEILING));
     }
 
     public BigDecimal toBigDecimal() {
@@ -127,6 +127,27 @@ public class HNumber extends BigDecimal {
 
     public static HNumber sum(HNumber n1, HNumber n2) throws NumberException {
 
+        if (n1 == null || n2 == null) {
+            throw new NumberException("Invalida number");
+        }
+
+        if (n1 instanceof HNumber) {
+
+            if (n2 instanceof HNumber) {
+                return n2.add(n1);
+            } else {
+                return n1;
+            }
+
+        } else {
+            return n2;
+        }
+    }
+    
+    public static HNumber sum(HNumber n1, double d2) throws NumberException {
+        
+        HNumber n2 = new HNumber(d2);
+        
         if (n1 == null || n2 == null) {
             throw new NumberException("Invalida number");
         }
@@ -170,9 +191,9 @@ public class HNumber extends BigDecimal {
     public static boolean isInteger(String text) {
         try {
             Integer i = Integer.parseInt(text);
-            return i != null;
-        } catch (Exception e) {
-            return false;
+            return Boolean.TRUE;
+        } catch (NumberFormatException e) {
+            return Boolean.FALSE;
         }
     }
 }

@@ -144,13 +144,32 @@ public class MedicaoGasControler extends ControlerBasic implements Controler {
         List list = query.getResultList();
 
         if (list != null && !list.isEmpty()) {
-            
+
             MedicaoGas mg = (MedicaoGas) list.get(0);
-            
+
             return mg.getLeituraAtual();
         } else {
             return 0;
         }
 
+    }
+
+    public static MedicaoGas get(final Competencia c) throws Exception {
+
+        String jpSql = "from MedicaoGas where competencia_id = ?1";
+
+        Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
+        query.setParameter(1, c.getId());
+
+        List list = query.getResultList();
+
+        if (list != null && !list.isEmpty()) {
+
+            MedicaoGas mg = (MedicaoGas) list.get(0);
+
+            return mg;
+        } else {
+            throw new Exception("Não existe registro de gsá para a competência: " + c.toString() + ".");
+        }
     }
 }

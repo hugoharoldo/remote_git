@@ -7,6 +7,7 @@ package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 

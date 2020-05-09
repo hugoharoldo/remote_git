@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Query;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -68,7 +69,7 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
     public void updateDataTable(JTable jTable) {
 
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Competencia", "Valor",  "Parcela", "Descricao", "Tipo"};
+        String[] colunas = new String[]{"ID", "Competencia", "Valor", "Parcela", "Descricao", "Tipo"};
 
         for (DespesaCompartilhada p : getDespesaCompartilhadas()) {
             dados.add(new Object[]{
@@ -122,52 +123,68 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
 
 //        Fazer o controle aqui se tiver mais de uma parcela, 
 //        perguntando se deseja lançar tudo
-
         DespesaCompartilhada dc = (DespesaCompartilhada) object;
-        
+
         int parcelas = dc.getParcelas();
-        
-        if (parcelas > 1){
-            
+
+        if (parcelas > 1) {
+
             CompetenciaControle cc = new CompetenciaControle();
             Competencia c = dc.getCompetencia();
-            
+
             double valorParcela = dc.getValor();
             double somaValorParcelaLancado = 0;
-            
+
             BigDecimal valorParcelado = new BigDecimal(valorParcela / parcelas).setScale(2, RoundingMode.HALF_EVEN);
             ArrayList<DespesaCompartilhada> despesas = new ArrayList();
             for (int i = 0; i < parcelas; i++) {
-                
+
                 DespesaCompartilhada d = dc.clone();
-                
+
                 d.setValor(valorParcelado.doubleValue());
                 d.setParcelas(1 + i);
                 d.setCompetencia(c);
-                
+
                 despesas.add(d);
-                
+
                 somaValorParcelaLancado += valorParcelado.doubleValue();
-            
+
                 //Se ainda tem mais um registro para iterar
-                if (i < parcelas){
+                if (i < parcelas) {
                     c = cc.getProximaCompetencia(c.getAno(), c.getMes());
                 }
             }
-            
-            if (valorParcela > somaValorParcelaLancado){
-                
+
+            if (valorParcela > somaValorParcelaLancado) {
+
                 BigDecimal diferenca = new BigDecimal(valorParcelado.doubleValue() - somaValorParcelaLancado).setScale(2, RoundingMode.HALF_EVEN);
                 double valorCorrigido = diferenca.doubleValue() + despesas.get(0).getValor();
-                
+
                 despesas.get(0).setValor(valorCorrigido);
             }
-            
+
             super.save(despesas);
-            
-        }else{
+
+        } else {
             super.save(dc, dc.getId());
         }
-        
+
+    }
+
+    /**
+     * Retornam todas as DespesaCompartilhada da competencia
+     *
+     * @param competencia
+     * @return
+     */
+    public static List<DespesaCompartilhada> getDespesaCompartilhadas(Competencia competencia) {
+
+        String jpSql = "from DespesaCompartilhada where dsc_competencia = ?1";
+
+        Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
+        query.setParameter(1, competencia.getId());
+
+        return query.getResultList();
+
     }
 }

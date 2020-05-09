@@ -282,7 +282,7 @@ public class FormMedicaoGas extends HDialog {
 
     }//GEN-LAST:event_jButtonCalculaMedicaoGasActionPerformed
     
-    private void alimentaLeituraAnterior() {
+    private void alimentaLeituraAnterior() throws Exception {
 
         //verifica se os dois combos estão preenchidos, se tiver busca...
         if (jComboBoxApartamento.getModel().getSelectedItem() != null
@@ -307,12 +307,24 @@ public class FormMedicaoGas extends HDialog {
 
     private void jComboBoxApartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxApartamentoItemStateChanged
         // TODO add your handling code here:
-        alimentaLeituraAnterior();
+        try {
+            
+            alimentaLeituraAnterior();
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
     }//GEN-LAST:event_jComboBoxApartamentoItemStateChanged
 
     private void jComboBoxCompetenciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxCompetenciaItemStateChanged
         // TODO add your handling code here:
-        alimentaLeituraAnterior();
+        try {
+            
+            alimentaLeituraAnterior();
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_jComboBoxCompetenciaItemStateChanged
 
     /**

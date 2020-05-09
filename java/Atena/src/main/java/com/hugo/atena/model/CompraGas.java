@@ -5,9 +5,7 @@
  */
 package com.hugo.atena.model;
 
-import com.hugo.atena.utils.HNumber;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;

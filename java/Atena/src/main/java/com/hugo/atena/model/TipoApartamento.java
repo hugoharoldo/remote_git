@@ -5,6 +5,7 @@
  */
 package com.hugo.atena.model;
 
+import com.hugo.atena.controler.enums.TamanhoApartamento;
 import com.hugo.atena.model.util.EntityManagerUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -37,6 +38,12 @@ public class TipoApartamento implements Serializable {
 
     public TipoApartamento() {
 
+    }
+    
+    public TamanhoApartamento getTamanhoApartamento() throws Exception {
+
+        //Criar um tipo e armazenarrrrr...
+        return TamanhoApartamento.getTipo(getId());
     }
 
     /**

@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "despesa_compartilhada")
 public class DespesaCompartilhada implements Serializable, Cloneable {
-
+    
     @Id
     @SequenceGenerator(name = "dsc_id", sequenceName = "seq_despesa_compartilhada_id", allocationSize = 1)
     @GeneratedValue(generator = "dsc_id", strategy = GenerationType.SEQUENCE)
@@ -40,7 +40,7 @@ public class DespesaCompartilhada implements Serializable, Cloneable {
     private int tipoDespesa;
     @Column(name = "dsc_valor", nullable = false)
     private double valor;
-
+    
     public DespesaCompartilhada() {
     }
 

@@ -5,13 +5,17 @@
  */
 package com.hugo.atena.controler.enums;
 
+import com.hugo.atena.utils.HNumber;
+
 /**
  *
  * @author hugo
  */
 public enum TipoDespesa {
 
+    //Limpeza de caixa de água, manutenção no portão, coisas de manutenção
     SEM_INVESTIMENTO(1, "Sem investimento"),
+    //Chamada de capital, pintura, obra
     COM_INVESTIMENTO(2, "Com investimento");
 
     private int tipo;
@@ -61,6 +65,44 @@ public enum TipoDespesa {
         } else {
             return SEM_INVESTIMENTO;
         }
+
+    }
+
+    public HNumber valorParticipacao(TamanhoApartamento td, double valorDespesa) throws Exception {
+
+        double fator;
+
+        if (null == this) {
+            throw new Exception("Tipo de apartamento não cadastrado");
+        } else {
+
+            switch (this) {
+
+                case COM_INVESTIMENTO:
+                    if (td == TamanhoApartamento.GRANDE) {
+                        fator = 11.2975;
+                    } else {
+                        fator = 12.8998;
+                    }
+                    break;
+
+                case SEM_INVESTIMENTO:
+                    if (td == TamanhoApartamento.GRANDE) {
+
+                        fator = 11.5241;
+                    } else {
+                        fator = 15.3911;
+
+                    }
+                    break;
+
+                default:
+                    throw new Exception("Tipo de apartamento não cadastrado");
+            }
+        }
+        
+        
+        return new HNumber((fator * valorDespesa) / 100);
 
     }
 
