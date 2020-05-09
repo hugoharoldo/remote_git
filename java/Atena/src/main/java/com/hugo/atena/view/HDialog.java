@@ -66,7 +66,13 @@ public abstract class HDialog extends javax.swing.JDialog {
 
             painelNavegacao.add(navegador, java.awt.BorderLayout.CENTER);
 
-            getControler().updateDataTable(listagemDadosTabela);
+            try {
+
+                getControler().updateDataTable(listagemDadosTabela);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
 
         }
 
@@ -396,7 +402,13 @@ public abstract class HDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         getControler().remove(getControler().getEntity());
 
-        getControler().updateDataTable(listagemDadosTabela);
+        try {
+
+            getControler().updateDataTable(listagemDadosTabela);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
 
         modoInicial();
     }
