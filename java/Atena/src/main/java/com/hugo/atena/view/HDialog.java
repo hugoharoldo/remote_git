@@ -6,9 +6,12 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.controler.Controler;
+import com.hugo.atena.utils.Events;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,6 +49,20 @@ public abstract class HDialog extends javax.swing.JDialog {
                 public void valueChanged(ListSelectionEvent e) {
 
                     carregaRegistroTabela();
+                }
+            });
+
+            //Add Key Listener
+            listagemDadosTabela.addKeyListener(new KeyAdapter() {
+
+                public void keyPressed(KeyEvent e) {
+                    
+                    //key code = 127 (Excluir)    extended modifiers = 64 (Shift)
+                    if (e.getKeyCode() == 127 && e.getModifiersEx() == 64) {
+                        
+                        getBtnExcluir().doClick();
+                        
+                    }
                 }
             });
 
@@ -93,16 +110,18 @@ public abstract class HDialog extends javax.swing.JDialog {
     public abstract void preencherTextField(Object object);
 
     public abstract Controler getControler();
-    
+
     /**
      * Utilizado para setar o foco quando excluir um registro
-     * @return 
+     *
+     * @return
      */
     public abstract JPanel getPainelListagemDados();
-    
+
     /**
      * Painel principal de abas
-     * @return 
+     *
+     * @return
      */
     public abstract JTabbedPane getPainelPrincipal();
 
