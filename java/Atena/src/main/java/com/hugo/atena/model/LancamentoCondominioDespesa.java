@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,10 +29,10 @@ public class LancamentoCondominioDespesa implements Serializable {
     @GeneratedValue(generator = "lcd_id", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "despesa_id", referencedColumnName = "id", nullable = false)
     private DespesaCompartilhada compartilhada;
-
+    
     @Column(name = "lcd_valor_correspondente", precision = 2)
     private double valorCorrespondente;
 

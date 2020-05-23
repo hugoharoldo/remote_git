@@ -131,35 +131,28 @@ public class MedicaoGasControler extends ControlerBasic implements Controler {
         super.save(object, ((MedicaoGas) object).getId());
     }
 
-    public int getUltimaMedicaoGas(final Apartamento a, final Competencia c) throws Exception {
-
+    public static int getUltimaMedicaoGas(final Apartamento a, final Competencia c) throws Exception {
+        
         Competencia anterior = new CompetenciaControle().getAnteriorCompetencia(c.getAno(), c.getMes());
+        
+        MedicaoGas mg = getMedicaoGas(a, anterior);
+        
+        if (mg == null){
+            return 0;
+        }else{
+            return mg.getLeituraAtual();
+        }
 
+    }
+    
+    public static MedicaoGas getMedicaoGas(final Apartamento a, final Competencia c) throws Exception {
+
+        
         String jpSql = "from MedicaoGas where apartamento_id = ?1 and competencia_id = ?2";
 
         Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
         query.setParameter(1, a.getId());
-        query.setParameter(2, anterior.getId());
-
-        List list = query.getResultList();
-
-        if (list != null && !list.isEmpty()) {
-
-            MedicaoGas mg = (MedicaoGas) list.get(0);
-
-            return mg.getLeituraAtual();
-        } else {
-            return 0;
-        }
-
-    }
-
-    public static MedicaoGas get(final Competencia c) throws Exception {
-
-        String jpSql = "from MedicaoGas where competencia_id = ?1";
-
-        Query query = EntityManagerUtil.getEntityManager().createQuery(jpSql);
-        query.setParameter(1, c.getId());
+        query.setParameter(2, c.getId());
 
         List list = query.getResultList();
 
@@ -169,7 +162,9 @@ public class MedicaoGasControler extends ControlerBasic implements Controler {
 
             return mg;
         } else {
-            throw new Exception("Não existe registro de gsá para a competência: " + c.toString() + ".");
+            return null;
         }
+
     }
+
 }

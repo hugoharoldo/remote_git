@@ -35,9 +35,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
@@ -71,29 +73,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         jMenuRegister.add(jMenuItem5);
 
-        jMenuItem2.setText("Competencia");
+        jMenuItem2.setText("Competencias");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenuRegister.add(jMenuItem2);
-
-        jMenuItem4.setText("Medição de Gás");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenuRegister.add(jMenuItem4);
-
-        jMenuItem6.setText("Despesas Compartilhadas");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenuRegister.add(jMenuItem6);
+        jMenuRegister.add(jSeparator1);
 
         jMenuItem1.setText("Usuários do Sistemas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,15 +90,35 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         jMenuRegister.add(jMenuItem1);
 
+        menuBar.add(jMenuRegister);
+
+        jMenu1.setText("Lançamentos");
+
+        jMenuItem4.setText("Medição de Gás");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem6.setText("Despesas Compartilhadas");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
         jMenuItem7.setText("Calular Condomínio");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenuRegister.add(jMenuItem7);
+        jMenu1.add(jMenuItem7);
 
-        menuBar.add(jMenuRegister);
+        menuBar.add(jMenu1);
 
         jMenuHelp.setText("Ajuda");
         jMenuHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -275,6 +282,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuIPeople;
@@ -286,6 +294,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenu jMenuRegister;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }

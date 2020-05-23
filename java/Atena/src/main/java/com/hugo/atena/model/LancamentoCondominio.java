@@ -10,8 +10,6 @@ import com.hugo.atena.controler.enums.TamanhoApartamento;
 import com.hugo.atena.controler.enums.TipoDespesa;
 import com.hugo.atena.utils.HNumber;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -63,7 +61,7 @@ public class LancamentoCondominio implements Serializable {
     private Double valorTotal;
 
     //lancto - Nome do atributo
-    @OneToMany(mappedBy = "lancto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lancto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<LancamentoCondominioDespesa> despesas = new ArrayList<>();
 
     public LancamentoCondominio() {
@@ -82,7 +80,7 @@ public class LancamentoCondominio implements Serializable {
 
         if (getGas() == null) {
             
-            setGas(MedicaoGasControler.get(getCompetencia()));
+            setGas(MedicaoGasControler.getMedicaoGas(getApartamento(), getCompetencia()));
         
             if (getGas() == null) {
                 throw new Exception("É obrigatório informar o valor de lançamento do gás.");
@@ -92,11 +90,19 @@ public class LancamentoCondominio implements Serializable {
     }
 
     private void calculaCondominio() throws Exception {
-        setValorCondominio(getApartamento().getTipoApartamento().getVlrCondominio());
+        if (getApartamento().isSindico()) {
+            setValorCondominio(0.d);
+        }else{
+            setValorCondominio(getApartamento().getTipoApartamento().getVlrCondominio());
+        }        
     }
 
     private void calculaFundoReserva() throws Exception {
-        setValorFundoReserva(getApartamento().getTipoApartamento().getVlrFundoReserva());
+        if (getApartamento().isSindico()) {
+            setValorFundoReserva(0.d);
+        }else{
+            setValorFundoReserva(getApartamento().getTipoApartamento().getVlrFundoReserva());
+        }
     }
 
     /**
@@ -119,10 +125,13 @@ public class LancamentoCondominio implements Serializable {
 
         //Soma valor condomínio
         valor = HNumber.sum(valor, getValorCondominio());
-
+        
         //Soma fundoReserva 
         valor = HNumber.sum(valor, getValorFundoReserva());
-
+        
+        //Soma gás
+        valor = HNumber.sum(valor, getGas().getValor());
+        
         //Soma despesas
         for (LancamentoCondominioDespesa ld : getDespesas()) {
             

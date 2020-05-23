@@ -13,6 +13,8 @@ import com.hugo.atena.model.DespesaCompartilhada;
 import com.hugo.atena.view.model.ComboBoxModelCompetencia;
 import com.hugo.atena.view.model.ComboBoxModelMes;
 import com.hugo.atena.view.model.ComboBoxModelTipoDespesa;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -321,6 +323,21 @@ public class FormDespesaCompartilhada extends HDialog {
     public void atualizaValoresDadosTela() {
         
         preencherTextField(controle.getEntity());
+        
+    }
+    
+        
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+    
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
         
     }
 }

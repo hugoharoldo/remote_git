@@ -10,7 +10,11 @@ import com.hugo.atena.model.DespesaCompartilhada;
 import com.hugo.atena.model.LancamentoCondominio;
 import com.hugo.atena.model.LancamentoCondominioDespesa;
 import com.hugo.atena.model.Pessoa;
+import java.sql.Connection;
 import javax.persistence.EntityManager;
+import org.hibernate.Session;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 
 /**
  *
@@ -26,14 +30,34 @@ public class ClasseTesteManutencaoEntidade {
 
         try {
         
-            despesas();
-            
+//            despesas();
+            testaConexaoPura();
             
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    private static void testaConexaoPura() throws Exception{
+    
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        
+        Session session = (Session) em.getDelegate();
+        SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
+        ConnectionProvider cp = sfi.getConnectionProvider();
+         Connection conn = cp.getConnection();
+        
+        
+//        Connection conn = em.unwrap(Connection.class);
+        
+        if (conn.isClosed()){
+            System.out.println("Close");
+        }else{
+            System.out.println("Open");
+        }
+        
+    }
+    
     private static void despesas() throws Exception {
         
         

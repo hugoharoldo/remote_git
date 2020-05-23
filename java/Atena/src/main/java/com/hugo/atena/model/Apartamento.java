@@ -24,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "apartamento")
-public class Apartamento implements Serializable {
+public class Apartamento implements Serializable, Cloneable {
 
     @Id
     @SequenceGenerator(name = "apt_id", sequenceName = "seq_apartamento_id", allocationSize = 1)
@@ -178,4 +178,7 @@ public class Apartamento implements Serializable {
         this.sindico = sindico;
     }
 
+    public Apartamento clone() throws CloneNotSupportedException{
+        return (Apartamento) super.clone();
+    }
 }

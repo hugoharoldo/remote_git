@@ -15,6 +15,8 @@ import com.hugo.atena.view.model.ComboBoxModelCompetencia;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -259,21 +261,23 @@ public class FormMedicaoGas extends HDialog {
             //Criar método para buscar úlitmo lancamento
             double valorBotijao = 308;
             double metroCubicoP13 = 18;
-            double valorMCubico = (valorBotijao / metroCubicoP13);
+            HNumber valorMCubico = new HNumber(valorBotijao / metroCubicoP13);
             
             int gasAtual = Integer.parseInt(jTextFieldLeituraAtual.getText());
             
             int consumo = gasAtual - gasAnterior;
             
-            double valorDevido = consumo * (valorMCubico / 1000);
+            HNumber valorMCubicoBD = valorMCubico.divide(1000);
             
-            BigDecimal valorDevidoBD = new BigDecimal(valorDevido).setScale(2, RoundingMode.HALF_EVEN);
-            BigDecimal valorMCubicoBD = new BigDecimal(valorMCubico).setScale(2, RoundingMode.HALF_EVEN);
+            HNumber valorDevido = new HNumber(consumo);
+            valorDevido = valorDevido.multiply(valorMCubicoBD);
             
-            this.jTextFieldPrecoMetroCubico.setText(valorMCubicoBD.toString());
+          
+            
+            this.jTextFieldPrecoMetroCubico.setText(valorMCubicoBD.rounds(4).toString());
             this.jTextFieldConsumoMCubico.setText(String.valueOf(consumo));
             this.jTextFieldLeituraAnterior.setText(String.valueOf(gasAnterior));
-            this.jTextFieldValor.setText(valorDevidoBD.toString());
+            this.jTextFieldValor.setText(String.valueOf(valorDevido.rounds().doubleValue()));
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -465,5 +469,20 @@ public class FormMedicaoGas extends HDialog {
     public void atualizaValoresDadosTela() {
         
         preencherTextField((MedicaoGas) controleMedeGas.getEntity());
+    }
+    
+        
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+    
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
+        
     }
 }

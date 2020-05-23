@@ -8,6 +8,8 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.PessoaControle;
 import com.hugo.atena.model.Pessoa;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -32,7 +34,7 @@ public class FormPessoa extends HDialog {
         painelListaDados.add(this.getPainelNavegacao(), java.awt.BorderLayout.PAGE_END);
 
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -315,6 +317,20 @@ public class FormPessoa extends HDialog {
     public void atualizaValoresDadosTela() {
         
         preencherTextField(controlePessoa.getEntity());
+        
+    }
+
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
         
     }
 }

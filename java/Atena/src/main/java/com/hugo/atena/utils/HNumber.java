@@ -16,30 +16,32 @@ import java.math.RoundingMode;
 public class HNumber extends BigDecimal {
 
     public static final int SCALE = 2;
+    public static RoundingMode DEFAULT_MODE = RoundingMode.HALF_UP;
     
     public HNumber(BigDecimal bigDecimal) {
         super(bigDecimal.toString());
-        this.setScale(SCALE, RoundingMode.HALF_UP);
+        this.setScale(SCALE, DEFAULT_MODE);
     }
 
     public HNumber() {
         super(0);
-        this.setScale(SCALE, RoundingMode.HALF_UP);
+        this.setScale(SCALE, DEFAULT_MODE);
     }
 
     public HNumber(String val) {
         super(val);
-        this.setScale(SCALE, RoundingMode.HALF_UP);
+        this.setScale(SCALE, DEFAULT_MODE);
     }
 
     public HNumber(int val) {
         super(val);
-        this.setScale(SCALE, RoundingMode.HALF_UP);
+        this.setScale(SCALE, DEFAULT_MODE);
     }
 
     public HNumber(double val) {
-        super(val);
-        this.setScale(SCALE, RoundingMode.HALF_UP);
+        //Encontrei problemas ao converter 7.19d
+        super(String.valueOf(val));
+        this.setScale(SCALE, DEFAULT_MODE);
     }
 
     public static HNumber getNumber(double value) {
@@ -107,12 +109,12 @@ public class HNumber extends BigDecimal {
     }
 
     public HNumber rounds(int scale) throws NumberException {
-        return HNumber.getNumber(this.setScale(scale));
-
+        return new HNumber(setScale(scale, DEFAULT_MODE));
     }
 
     public HNumber rounds() throws NumberException {
-        return new HNumber(setScale(SCALE, RoundingMode.CEILING));
+          
+        return rounds(SCALE);
     }
 
     public BigDecimal toBigDecimal() {

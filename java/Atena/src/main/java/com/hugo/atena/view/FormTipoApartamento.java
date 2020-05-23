@@ -8,6 +8,8 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.TipoApartamentoControle;
 import com.hugo.atena.model.TipoApartamento;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -274,5 +276,19 @@ public class FormTipoApartamento extends HDialog {
     @Override
     public void atualizaValoresDadosTela() {
         preencherTextField(controleTipoApartamento.getEntity());
+    }
+
+    @Override
+    public JPanel getPainelListagemDados() {
+
+        return painelListaDados;
+
+    }
+
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+
+        return jTabbedPane;
+
     }
 }

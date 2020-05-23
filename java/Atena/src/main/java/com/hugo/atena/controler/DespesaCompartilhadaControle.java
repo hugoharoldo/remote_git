@@ -8,9 +8,8 @@ package com.hugo.atena.controler;
 import com.hugo.atena.model.Competencia;
 import com.hugo.atena.model.util.EntityManagerUtil;
 import com.hugo.atena.model.DespesaCompartilhada;
+import com.hugo.atena.utils.HNumber;
 import com.hugo.atena.view.model.TableModel;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -135,7 +134,7 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
             double valorParcela = dc.getValor();
             double somaValorParcelaLancado = 0;
 
-            BigDecimal valorParcelado = new BigDecimal(valorParcela / parcelas).setScale(2, RoundingMode.HALF_EVEN);
+            HNumber valorParcelado = new HNumber(valorParcela / parcelas);
             ArrayList<DespesaCompartilhada> despesas = new ArrayList();
             for (int i = 0; i < parcelas; i++) {
 
@@ -157,7 +156,7 @@ public class DespesaCompartilhadaControle extends ControlerBasic implements Cont
 
             if (valorParcela > somaValorParcelaLancado) {
 
-                BigDecimal diferenca = new BigDecimal(valorParcelado.doubleValue() - somaValorParcelaLancado).setScale(2, RoundingMode.HALF_EVEN);
+                HNumber diferenca = new HNumber(valorParcelado.doubleValue() - somaValorParcelaLancado);
                 double valorCorrigido = diferenca.doubleValue() + despesas.get(0).getValor();
 
                 despesas.get(0).setValor(valorCorrigido);

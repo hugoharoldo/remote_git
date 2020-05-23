@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -92,6 +93,18 @@ public abstract class HDialog extends javax.swing.JDialog {
     public abstract void preencherTextField(Object object);
 
     public abstract Controler getControler();
+    
+    /**
+     * Utilizado para setar o foco quando excluir um registro
+     * @return 
+     */
+    public abstract JPanel getPainelListagemDados();
+    
+    /**
+     * Painel principal de abas
+     * @return 
+     */
+    public abstract JTabbedPane getPainelPrincipal();
 
     /**
      * Atualizar os Fields da tela com os valores que estão no Controler
@@ -400,17 +413,31 @@ public abstract class HDialog extends javax.swing.JDialog {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        getControler().remove(getControler().getEntity());
 
-        try {
+        if (JOptionPane.showConfirmDialog(null, "Confirma excluir registro?", "Excluir registro", JOptionPane.YES_NO_OPTION)
+                == JOptionPane.YES_OPTION) {
 
-            getControler().updateDataTable(listagemDadosTabela);
+            getControler().remove(getControler().getEntity());
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            try {
+
+                getControler().updateDataTable(listagemDadosTabela);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+
+            modoInicial();
+
+            //envia para o o tab principal
+            if (getPainelPrincipal() != null
+                    && getPainelListagemDados() != null) {
+
+                getPainelPrincipal().setSelectedComponent(getPainelListagemDados());
+            }
+
         }
 
-        modoInicial();
     }
 
     // </editor-fold>

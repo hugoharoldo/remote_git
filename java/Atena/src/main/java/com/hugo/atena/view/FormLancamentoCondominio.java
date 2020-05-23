@@ -6,15 +6,11 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.controler.LancamentoCondominioControle;
-import com.hugo.atena.model.Apartamento;
 import com.hugo.atena.model.Competencia;
 import com.hugo.atena.model.LancamentoCondominio;
-import com.hugo.atena.utils.HNumber;
-import com.hugo.atena.view.model.ComboBoxModelApartamento;
 import com.hugo.atena.view.model.ComboBoxModelCompetencia;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -256,5 +252,20 @@ public class FormLancamentoCondominio extends HDialog {
     public void atualizaValoresDadosTela() {
         
         preencherTextField((LancamentoCondominio) controle.getEntity());
+    }
+    
+        
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+    
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
+        
     }
 }

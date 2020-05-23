@@ -12,6 +12,8 @@ import com.hugo.atena.model.Pessoa;
 import com.hugo.atena.model.TipoApartamento;
 import com.hugo.atena.view.model.ComboBoxModelPessoa;
 import com.hugo.atena.view.model.ComboBoxModelTipoApartamento;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -305,6 +307,20 @@ public class FormApartamento extends HDialog {
     public void atualizaValoresDadosTela() {
         
         preencherTextField(controleApto.getEntity());
+        
+    }
+    
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
         
     }
 }

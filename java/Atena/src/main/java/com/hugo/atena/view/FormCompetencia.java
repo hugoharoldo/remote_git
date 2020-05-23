@@ -8,6 +8,8 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.CompetenciaControle;
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.model.Competencia;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -253,5 +255,20 @@ public class FormCompetencia extends HDialog {
 
         preencherTextField(controleCompetencia.getEntity());
     
+    }
+    
+        
+    @Override
+    public JPanel getPainelListagemDados() {
+        
+        return painelListaDados;
+        
+    }
+    
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+        
+        return jTabbedPane;
+        
     }
 }

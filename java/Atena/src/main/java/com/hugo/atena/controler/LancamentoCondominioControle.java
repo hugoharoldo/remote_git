@@ -16,8 +16,6 @@ import com.hugo.atena.utils.HNumber;
 import com.hugo.atena.view.model.TableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -74,7 +72,7 @@ public class LancamentoCondominioControle extends ControlerBasic implements Cont
 
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"ID", "Competencia", "Apartamento",
-            "Gás", "Despesas com investimento", "Despesas com investimento", "Total"};
+            "Condomínio", "Fundo reserva", "Gás", "Despesas com investimento", "Despesas com investimento", "Total"};
 
         for (LancamentoCondominio p : getTodasLancamentoCondominio()) {
             
@@ -95,6 +93,8 @@ public class LancamentoCondominioControle extends ControlerBasic implements Cont
                 p.getId(),
                 p.getCompetencia().getAno() + " - " + p.getCompetencia().getMes(),
                 p.getApartamento().getNrApartamento(),
+                p.getValorCondominio(),
+                p.getValorFundoReserva(),
                 p.getGas().getValor(),
                 semInvetimento.toString(),
                 comInvetimento.toString(),
@@ -160,7 +160,7 @@ public class LancamentoCondominioControle extends ControlerBasic implements Cont
 
     private ArrayList<Object> getLancamentoCondominios(Competencia competencia) throws Exception {
 
-        ArrayList<Object> lancamentoCondominio = new ArrayList<>();
+        ArrayList<Object> list = new ArrayList<>();
 
         List<DespesaCompartilhada> despesaCompartilhadas = DespesaCompartilhadaControle.getDespesaCompartilhadas();
 
@@ -172,11 +172,11 @@ public class LancamentoCondominioControle extends ControlerBasic implements Cont
             lc.setCompetencia(competencia);
             lc.calculaValores(despesaCompartilhadas);
 
-            lancamentoCondominio.add(lc);
+            list.add(lc);
 
         }
 
-        return lancamentoCondominio;
+        return list;
 
     }
 

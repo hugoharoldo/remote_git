@@ -8,6 +8,8 @@ package com.hugo.atena.view;
 import com.hugo.atena.controler.Controler;
 import com.hugo.atena.controler.UsuarioSistemaControle;
 import com.hugo.atena.model.UsuarioSistema;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -23,7 +25,7 @@ public class FormUsuarioSistema extends HDialog {
     public FormUsuarioSistema(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         painelBotoesManutencao.add(this.getPainelSalvador());
 
         painelListaDados.add(this.getPainelNavegacao(), java.awt.BorderLayout.PAGE_END);
@@ -198,5 +200,19 @@ public class FormUsuarioSistema extends HDialog {
     public void atualizaValoresDadosTela() {
         jFieldNome.setText(((UsuarioSistema) usc.getEntity()).getNome());
         jFiledSenha.setText(((UsuarioSistema) usc.getEntity()).getSenha());
+    }
+
+    @Override
+    public JPanel getPainelListagemDados() {
+
+        return painelListaDados;
+
+    }
+
+    @Override
+    public JTabbedPane getPainelPrincipal() {
+
+        return jTabbedPane;
+
     }
 }
