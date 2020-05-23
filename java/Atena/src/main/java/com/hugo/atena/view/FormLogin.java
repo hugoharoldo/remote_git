@@ -6,6 +6,7 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.controler.UsuarioSistemaControle;
+import com.hugo.atena.model.util.EntityManagerUtil;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +19,12 @@ public class FormLogin extends javax.swing.JFrame {
      * Creates new form FormLogin
      */
     public FormLogin() {
+
+        //Cria a factory para agilizar o long
+        EntityManagerUtil.getEntityManager();
+
         initComponents();
+
     }
 
     /**
@@ -61,6 +67,11 @@ public class FormLogin extends javax.swing.JFrame {
                 jTextFieldUsuarioActionPerformed(evt);
             }
         });
+        jTextFieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldUsuarioKeyPressed(evt);
+            }
+        });
         getContentPane().add(jTextFieldUsuario);
         jTextFieldUsuario.setBounds(20, 40, 210, 29);
 
@@ -92,10 +103,7 @@ public class FormLogin extends javax.swing.JFrame {
         if (UsuarioSistemaControle.isUsuarioAutorizado(jTextFieldUsuario.getText(),
                 jPasswordFieldSenha.getText())) {
 
-            FormPrincipal fp = new FormPrincipal();
-            fp.setVisible(true);
-
-            dispose();
+            entraNoSistema();
 
         } else {
             JOptionPane.showMessageDialog(null, "Acesso não autorizado");
@@ -103,6 +111,13 @@ public class FormLogin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void entraNoSistema() {
+        FormPrincipal fp = new FormPrincipal();
+        fp.setVisible(true);
+
+        dispose();
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -119,6 +134,17 @@ public class FormLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButton1.requestFocus();
     }//GEN-LAST:event_jPasswordFieldSenhaActionPerformed
+
+    private void jTextFieldUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioKeyPressed
+        // TODO add your handling code here:
+//        key code = 127 (Insert)    extended modifiers = 64 (Shift)
+        if (evt.getKeyCode() == 155 && evt.getModifiersEx() == 64) {
+
+            entraNoSistema();
+
+        }
+
+    }//GEN-LAST:event_jTextFieldUsuarioKeyPressed
 
     /**
      * @param args the command line arguments
