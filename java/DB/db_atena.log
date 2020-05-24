@@ -1,40 +1,4 @@
 /*C3*/SET SCHEMA PUBLIC
-\u000a    create table apartamento (\u000a        id integer not null,\u000a        apt_numero integer not null,\u000a        apt_sindico boolean,\u000a        apt_proprietario integer not null,\u000a        apt_responsavel integer not null,\u000a        apt_tipo integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table competencia (\u000a        id integer not null,\u000a        cpt_ano integer not null,\u000a        cpt_mes integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table compra_gas (\u000a        id integer not null,\u000a        cpr_dtcompra timestamp not null,\u000a        cpr_valor double,\u000a        primary key (id)\u000a    )
-\u000a    create table despesa_compartilhada (\u000a        id integer not null,\u000a        dsc_descricao varchar(255) not null,\u000a        dsc_parcelas integer not null,\u000a        dsc_tipo integer not null,\u000a        dsc_valor double not null,\u000a        dsc_competencia integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table lancamento_condominio (\u000a        id integer not null,\u000a        lct_valor_condominio double,\u000a        lct_valor_fundo_reserva double,\u000a        lct_valor_total double,\u000a        apartamento_id integer not null,\u000a        competencia_id integer not null,\u000a        medicaogas_id integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table lancamento_condominio_despesa (\u000a        id integer not null,\u000a        lcd_valor_correspondente double,\u000a        despesa_id integer not null,\u000a        lancamento_id integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table medicao_gas (\u000a        id integer not null,\u000a        mdg_leitura_anterior integer not null,\u000a        mdg_leitura_atual integer not null,\u000a        mdg_preco_gas double not null,\u000a        mdg_total_consumo integer not null,\u000a        mdg_valor double not null,\u000a        apartamento_id integer not null,\u000a        competencia_id integer not null,\u000a        primary key (id)\u000a    )
-\u000a    create table people (\u000a        id integer not null,\u000a        pep_cnpjcpf varchar(14) not null,\u000a        pep_complemento varchar(255),\u000a        pep_email varchar(90) not null,\u000a        pep_telefone varchar(20) not null,\u000a        pep_name varchar(90) not null,\u000a        primary key (id)\u000a    )
-\u000a    create table tipo_apartamento (\u000a        id integer not null,\u000a        att_descricao varchar(255) not null,\u000a        att_vlr_condominio double not null,\u000a        att_vlr_fundo double not null,\u000a        primary key (id)\u000a    )
-\u000a    create table usuario_sitema (\u000a        id integer not null,\u000a        uss_nome varchar(90) not null,\u000a        uss_senha varchar(90) not null,\u000a        primary key (id)\u000a    )
-\u000a    alter table apartamento \u000a        add constraint UK_atofy2u7gj8dao48h08auxpeb  unique (apt_numero)
-\u000a    alter table people \u000a        add constraint UK_ks49g1u85newtcoc0bvbdfh7c  unique (pep_cnpjcpf)
-\u000a    alter table usuario_sitema \u000a        add constraint UK_4xoua7jdbmv4g1hijrgqopx0b  unique (uss_nome)
-\u000a    alter table apartamento \u000a        add constraint FK_t1hb0rp2vdh7ptbpm7bhrx9o4 \u000a        foreign key (apt_proprietario) \u000a        references people
-\u000a    alter table apartamento \u000a        add constraint FK_d1w1rlpnmk1dyaa6820swmav6 \u000a        foreign key (apt_responsavel) \u000a        references people
-\u000a    alter table apartamento \u000a        add constraint FK_6kof11h6827cefj5j1ekewxvs \u000a        foreign key (apt_tipo) \u000a        references tipo_apartamento
-\u000a    alter table despesa_compartilhada \u000a        add constraint FK_hjclw05bgp4t6kg5v63a6x1yj \u000a        foreign key (dsc_competencia) \u000a        references competencia
-\u000a    alter table lancamento_condominio \u000a        add constraint FK_74hi6tsivoywt7t727tvu37ka \u000a        foreign key (apartamento_id) \u000a        references apartamento
-\u000a    alter table lancamento_condominio \u000a        add constraint FK_g897srtkxih1pebh6vondgvk6 \u000a        foreign key (competencia_id) \u000a        references competencia
-\u000a    alter table lancamento_condominio \u000a        add constraint FK_qy1xda7p4ducwutekbo4t224o \u000a        foreign key (medicaogas_id) \u000a        references medicao_gas
-\u000a    alter table lancamento_condominio_despesa \u000a        add constraint FK_n2eobvt5sqywqa9y82rsh6j5w \u000a        foreign key (despesa_id) \u000a        references despesa_compartilhada
-\u000a    alter table lancamento_condominio_despesa \u000a        add constraint FK_24gv2eybtjv7l1qgp5jch0b6s \u000a        foreign key (lancamento_id) \u000a        references lancamento_condominio
-\u000a    alter table medicao_gas \u000a        add constraint FK_9k8h5rcwvglfk0v9ago7ixbe2 \u000a        foreign key (apartamento_id) \u000a        references apartamento
-\u000a    alter table medicao_gas \u000a        add constraint FK_p8ugfqkcwlrpwp3w5536oe8sc \u000a        foreign key (competencia_id) \u000a        references competencia
-\u000a    create sequence mdg_medicao_gas_id start with 1
-\u000a    create sequence seq_apartamento_id start with 1
-\u000a    create sequence seq_competencia_id start with 1
-\u000a    create sequence seq_compra_gas_id start with 1
-\u000a    create sequence seq_despesa_compartilhada_id start with 1
-\u000a    create sequence seq_lancamento_despesas_id start with 1
-\u000a    create sequence seq_people_id start with 1
-\u000a    create sequence seq_tipo_apartamento_id start with 1
-\u000a    create sequence seq_usuario_sistema_id start with 1
-INSERT INTO USUARIO_SITEMA VALUES(1,'admin','admin')
-ALTER SEQUENCE PUBLIC.SEQ_USUARIO_SISTEMA_ID RESTART WITH 2
-COMMIT
-INSERT INTO PEOPLE VALUES(1,'04823071964','','hugoharoldo@gmail.com','47 999213422','Hugo Haroldo Swaorwsky')
-ALTER SEQUENCE PUBLIC.SEQ_PEOPLE_ID RESTART WITH 2
+DELETE FROM PEOPLE WHERE ID=1
+INSERT INTO PEOPLE VALUES(1,'04823071964','Complemento teste','hugoharoldo@gmail.com','47 999213422','Hugo Haroldo Swaorwsky')
 COMMIT

@@ -7,7 +7,6 @@ package com.hugo.atena.controler;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -43,10 +42,11 @@ public abstract class ControlerBasic {
     }
 
     public void save(Object object, int idObjeto) {
+            
+        EntityManager em = EntityManagerUtil.getEntityManager();
 
         try {
 
-            EntityManager em = EntityManagerUtil.getEntityManager();
 
             em.getTransaction().begin();
 
@@ -65,6 +65,9 @@ public abstract class ControlerBasic {
             JOptionPane.showMessageDialog(null, mensagem);
 
         } catch (Exception e) {
+            
+            em.getTransaction().rollback();
+            
             JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
         }
     }
