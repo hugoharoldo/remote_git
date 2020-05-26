@@ -1,4 +1,0 @@
-/*C3*/SET SCHEMA PUBLIC
-DELETE FROM PEOPLE WHERE ID=1
-INSERT INTO PEOPLE VALUES(1,'04823071964','Complemento teste','hugoharoldo@gmail.com','47 999213422','Hugo Haroldo Swaorwsky')
-COMMIT

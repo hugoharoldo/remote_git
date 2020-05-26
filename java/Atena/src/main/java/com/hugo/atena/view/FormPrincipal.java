@@ -5,7 +5,14 @@
  */
 package com.hugo.atena.view;
 
+import com.hugo.atena.model.util.EntityManagerUtil;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import org.eclipse.persistence.sessions.Session;
+import org.hibernate.internal.SessionImpl;
 
 /**
  *
@@ -41,6 +48,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
 
@@ -119,6 +128,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem7);
 
         menuBar.add(jMenu1);
+
+        jMenu2.setText("Relatórios");
+
+        jMenuItem8.setText("Pessoas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
+        menuBar.add(jMenu2);
 
         jMenuHelp.setText("Ajuda");
         jMenuHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -236,14 +257,39 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        
+
         FormLancamentoCondominio frm = new FormLancamentoCondominio(this, true);
         frm.setTitle("Lancamento condomínio");
         frm.setLocationRelativeTo(null);
         frm.setResizable(false);
         frm.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+
+//        String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/report1.jrmx";
+        String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/report1.jasper";
+
+        try {
+
+            org.hibernate.Session hibernateSession = (org.hibernate.Session) EntityManagerUtil.getEntityManager().unwrap(org.hibernate.Session.class);
+
+            java.sql.Connection connection = ((SessionImpl) hibernateSession).connection();
+//
+            JasperPrint jp = JasperFillManager.fillReport(src, null, connection);
+
+            JasperViewer view = new JasperViewer(jp, false);
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+//        net.sf.jasperreports.engine.JasperPrint jp 
+
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +329,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuIPeople;
@@ -293,6 +340,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;

@@ -30,6 +30,7 @@ public class EntityManagerUtil {
         if (factory == null) {
 //            factory = Persistence.createEntityManagerFactory("AtenaPU");
             factory = Persistence.createEntityManagerFactory("AtenaHSQLDB");
+//            factory = getHSQLDB();
         }
         if (em == null) {
             em = factory.createEntityManager();
@@ -51,8 +52,9 @@ public class EntityManagerUtil {
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.connection.url", "jdbc:hsqldb:file:/home/hugo/Projects/GitProjects/remote_git/java/DB/db_atena;ifexists=false");
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("i can't", properties);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AtenaHSQLDB", properties);
 
         return emf;
     }
