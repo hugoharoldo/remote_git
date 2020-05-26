@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca4f14ed-2d3e-47df-a1db-7fd215130b90">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="72"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select * from people]]>
 	</queryString>
@@ -16,30 +16,62 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9a7bc8d4-8e53-498d-83b1-25ace195ecd2" x="451" y="3" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="35c5621a-9099-4813-a36a-23b7146e273a" x="532" y="3" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cc9b5fb2-551c-45d7-aa1b-7774fb22142b" x="1" y="0" width="571" height="23"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoas cadastradas no sistema]]></text>
+			</staticText>
+		</band>
 	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1b21cbb1-a6b7-4068-b10c-2d98cbe2ac82" x="0" y="0" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca0aceec-98a1-44fe-b186-69794264e5a1" x="292" y="0" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="53439773-6061-4fa3-9d13-1a8c98227545" x="392" y="0" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<textField>
-				<reportElement uuid="a0c8612c-10af-45a9-b2e3-47bede8aae01" x="0" y="0" width="100" height="20"/>
+				<reportElement uuid="a0c8612c-10af-45a9-b2e3-47bede8aae01" x="0" y="0" width="292" height="18"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{pep_name}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement uuid="d5d6bb92-2cdf-4a6b-b34f-51675e541bce" x="292" y="0" width="100" height="18"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pep_cnpjcpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="722eac84-d754-44be-a67c-7d8c4cb989b8" x="392" y="0" width="180" height="18"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pep_email}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
