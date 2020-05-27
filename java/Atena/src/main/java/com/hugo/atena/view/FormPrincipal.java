@@ -269,25 +269,22 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
 
-//        String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/report1.jrmx";
-        String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/report1.jasper";
+        String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/cadastro_pessoas.jasper";
 
         try {
 
             org.hibernate.Session hibernateSession = (org.hibernate.Session) EntityManagerUtil.getEntityManager().unwrap(org.hibernate.Session.class);
 
             java.sql.Connection connection = ((SessionImpl) hibernateSession).connection();
-//
+            
             JasperPrint jp = JasperFillManager.fillReport(src, null, connection);
 
             JasperViewer view = new JasperViewer(jp, false);
             view.setVisible(true);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
         }
-
-//        net.sf.jasperreports.engine.JasperPrint jp 
 
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
