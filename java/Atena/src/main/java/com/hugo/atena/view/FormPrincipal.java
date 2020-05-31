@@ -50,6 +50,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuAbout = new javax.swing.JMenuItem();
 
@@ -138,6 +139,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem8);
+
+        jMenuItem9.setText("Lançamento de condomínio");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem9);
 
         menuBar.add(jMenu2);
 
@@ -288,6 +297,28 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        
+                String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/boletos_codominio.jasper";
+
+        try {
+
+            org.hibernate.Session hibernateSession = (org.hibernate.Session) EntityManagerUtil.getEntityManager().unwrap(org.hibernate.Session.class);
+
+            java.sql.Connection connection = ((SessionImpl) hibernateSession).connection();
+            
+            JasperPrint jp = JasperFillManager.fillReport(src, null, connection);
+
+            JasperViewer view = new JasperViewer(jp, false);
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -338,6 +369,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jMenuRegister;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;
