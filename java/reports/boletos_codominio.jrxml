@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca4f14ed-2d3e-47df-a1db-7fd215130b90">
-	<property name="ireport.zoom" value="2.593742460100003"/>
+	<property name="ireport.zoom" value="1.7715610000000033"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<parameter name="mes" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select
 
@@ -25,7 +27,7 @@ inner join people as PEP on (PEP.ID = APT.apt_responsavel)
 inner join medicao_gas as MDG on (MDG.id = LCT.medicaogas_id)
 where
 
-CPT_ANO = 2020 AND  CPT_MES = 5]]>
+CPT_ANO = $P{ano} AND  CPT_MES = $P{mes}]]>
 	</queryString>
 	<field name="lct_valor_condominio" class="java.lang.Double"/>
 	<field name="lct_valor_fundo_reserva" class="java.lang.Double"/>
@@ -40,6 +42,9 @@ CPT_ANO = 2020 AND  CPT_MES = 5]]>
 	<field name="mdg_leitura_anterior" class="java.lang.Double"/>
 	<field name="mdg_preco_gas" class="java.lang.Double"/>
 	<field name="mdg_total_consumo" class="java.lang.Double"/>
+	<variable name="ValorTotalCondominio" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{lct_valor_total}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -55,61 +60,76 @@ CPT_ANO = 2020 AND  CPT_MES = 5]]>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement uuid="cc9b5fb2-551c-45d7-aa1b-7774fb22142b" x="1" y="0" width="571" height="29"/>
-				<textElement textAlignment="Center">
+			<textField>
+				<reportElement uuid="f932c863-b93d-43eb-8587-9b6ae9fe4d02" x="0" y="0" width="572" height="29"/>
+				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Lançamento condomínio]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["Lançamento condomínio: " + $P{ano} + " - " + $P{mes}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="113" splitType="Stretch">
+		<band height="78" splitType="Stretch">
 			<textField>
-				<reportElement uuid="a0c8612c-10af-45a9-b2e3-47bede8aae01" x="80" y="0" width="492" height="16"/>
+				<reportElement uuid="a0c8612c-10af-45a9-b2e3-47bede8aae01" x="80" y="4" width="492" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apt_numero} + "-" + $F{pep_name}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1b21cbb1-a6b7-4068-b10c-2d98cbe2ac82" x="0" y="0" width="70" height="16"/>
+				<reportElement uuid="1b21cbb1-a6b7-4068-b10c-2d98cbe2ac82" x="0" y="4" width="70" height="14"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Apartamento:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0c7b5d40-f1cf-48fb-bea4-c348dda37b5c" x="0" y="15" width="70" height="16"/>
+				<reportElement uuid="0c7b5d40-f1cf-48fb-bea4-c348dda37b5c" x="0" y="17" width="70" height="14"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Lançamentos:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="9486dffe-63a8-48dd-a127-91bee78c7b17" x="80" y="15" width="236" height="16"/>
+				<reportElement uuid="9486dffe-63a8-48dd-a127-91bee78c7b17" x="80" y="18" width="492" height="14"/>
 				<textElement/>
-				<textFieldExpression><![CDATA["Condomínio - " +  $F{lct_valor_condominio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Condomínio - R$ " +  com.hugo.atena.utils.Formata.preco($F{lct_valor_condominio})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="280195ae-1b91-4e9c-b3a1-fea1796cfe9b" x="80" y="30" width="236" height="16"/>
+				<reportElement uuid="280195ae-1b91-4e9c-b3a1-fea1796cfe9b" x="80" y="32" width="492" height="14"/>
 				<textElement/>
-				<textFieldExpression><![CDATA["Fundo de reserva - "  + $F{lct_valor_fundo_reserva}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Fundo de reserva - R$ "  + com.hugo.atena.utils.Formata.preco($F{lct_valor_fundo_reserva})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="9940f650-67ca-437a-bec1-751f29b5e8cf" x="0" y="60" width="70" height="16"/>
+				<reportElement uuid="9940f650-67ca-437a-bec1-751f29b5e8cf" x="0" y="61" width="70" height="14"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Valor total:]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="42a634e4-8639-4691-9e7a-e8803f7f612d" x="80" y="60" width="236" height="16"/>
+				<reportElement uuid="42a634e4-8639-4691-9e7a-e8803f7f612d" x="80" y="61" width="492" height="14"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{lct_valor_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " + com.hugo.atena.utils.Formata.preco($F{lct_valor_total})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="c283b48c-2069-474d-93b1-7b1909c90d46" x="80" y="45" width="236" height="16"/>
+				<reportElement uuid="c283b48c-2069-474d-93b1-7b1909c90d46" x="80" y="46" width="492" height="14"/>
 				<textElement/>
-				<textFieldExpression><![CDATA["Gás - " + $F{mdg_valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["GLP - R$ " + com.hugo.atena.utils.Formata.preco($F{mdg_valor})]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement uuid="eaf24baf-ff5a-428a-91a2-9d115830e80f" x="0" y="0" width="572" height="1"/>
+			</line>
 		</band>
 	</detail>
+	<summary>
+		<band height="22">
+			<textField>
+				<reportElement uuid="2163cdcb-cb67-4c8a-8094-8feca6eaaaf8" x="1" y="6" width="255" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Valor total condomínio: R$ " + com.hugo.atena.utils.Formata.preco($V{ValorTotalCondominio})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="378f0e45-e6e6-4581-b555-92f80bbe30e4" x="1" y="0" width="572" height="1"/>
+			</line>
+		</band>
+	</summary>
 </jasperReport>

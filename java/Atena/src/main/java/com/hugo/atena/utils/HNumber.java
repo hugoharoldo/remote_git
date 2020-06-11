@@ -8,6 +8,9 @@ package com.hugo.atena.utils;
 import com.hugo.atena.exceptions.NumberException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  *
@@ -17,7 +20,8 @@ public class HNumber extends BigDecimal {
 
     public static final int SCALE = 2;
     public static RoundingMode DEFAULT_MODE = RoundingMode.HALF_UP;
-    
+    private static final Locale PT_BR = new Locale("pt", "BR");
+
     public HNumber(BigDecimal bigDecimal) {
         super(bigDecimal.toString());
         this.setScale(SCALE, DEFAULT_MODE);
@@ -113,7 +117,7 @@ public class HNumber extends BigDecimal {
     }
 
     public HNumber rounds() throws NumberException {
-          
+
         return rounds(SCALE);
     }
 
@@ -145,11 +149,11 @@ public class HNumber extends BigDecimal {
             return n2;
         }
     }
-    
+
     public static HNumber sum(HNumber n1, double d2) throws NumberException {
-        
+
         HNumber n2 = new HNumber(d2);
-        
+
         if (n1 == null || n2 == null) {
             throw new NumberException("Invalida number");
         }
@@ -189,7 +193,7 @@ public class HNumber extends BigDecimal {
             return new HNumber(string.replace(",", ""));
         }
     }
-    
+
     public static boolean isInteger(String text) {
         try {
             Integer i = Integer.parseInt(text);
@@ -197,5 +201,40 @@ public class HNumber extends BigDecimal {
         } catch (NumberFormatException e) {
             return Boolean.FALSE;
         }
+    }
+
+    /**
+     * Retorna o valor em preço
+     *
+     * @param vlr que será formatado -> 2.4
+     * @return 2,40
+     */
+    public static String preco(double vlr) {
+
+        DecimalFormat priceFormatter = new DecimalFormat("000,000,000,000,000.00", new DecimalFormatSymbols(PT_BR));
+
+        String palavra = priceFormatter.format(vlr);
+
+        for (int i = 0; i < palavra.length(); i++) {
+
+            char c = palavra.charAt(i);
+
+            if (c != '0' && c != '.' && c != '-') {
+
+                palavra = palavra.substring(i, palavra.length());
+
+                if (c == ',') {
+                    palavra = "0" + palavra;
+                }
+
+                if (vlr < 0) {
+                    return ("-" + palavra);
+                } else {
+                    return palavra;
+                }
+            }
+        }
+
+        return palavra;
     }
 }

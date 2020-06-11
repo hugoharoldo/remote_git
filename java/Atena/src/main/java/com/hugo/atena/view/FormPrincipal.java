@@ -6,7 +6,9 @@
 package com.hugo.atena.view;
 
 import com.hugo.atena.model.util.EntityManagerUtil;
+import com.hugo.atena.view.report.FrmLancamentoCondominio;
 import java.sql.Connection;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -300,22 +302,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
         
-                String src = "/home/hugo/Projects/GitProjects/remote_git/java/reports/boletos_codominio.jasper";
-
-        try {
-
-            org.hibernate.Session hibernateSession = (org.hibernate.Session) EntityManagerUtil.getEntityManager().unwrap(org.hibernate.Session.class);
-
-            java.sql.Connection connection = ((SessionImpl) hibernateSession).connection();
-            
-            JasperPrint jp = JasperFillManager.fillReport(src, null, connection);
-
-            JasperViewer view = new JasperViewer(jp, false);
-            view.setVisible(true);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
-        }
+        
+        FrmLancamentoCondominio frm = new FrmLancamentoCondominio(this, true);
+        frm.setTitle("Relatório Lancamento condomínio");
+        frm.setLocationRelativeTo(null);
+        frm.setResizable(false);
+        frm.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
