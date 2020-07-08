@@ -16,7 +16,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="29" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField>
 				<reportElement uuid="9a7bc8d4-8e53-498d-83b1-25ace195ecd2" x="451" y="3" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
@@ -28,12 +28,16 @@
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="cc9b5fb2-551c-45d7-aa1b-7774fb22142b" x="1" y="0" width="571" height="29"/>
+				<reportElement uuid="cc9b5fb2-551c-45d7-aa1b-7774fb22142b" x="87" y="0" width="485" height="29"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pessoas cadastradas no sistema]]></text>
 			</staticText>
+			<image>
+				<reportElement uuid="cc2a8fa2-62a3-430a-95d9-ee2d597489e3" x="0" y="0" width="50" height="50"/>
+				<imageExpression><![CDATA["/home/hugo/Imagens/IMG_20190707_141622032.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
